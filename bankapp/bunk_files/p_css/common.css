@@ -1,0 +1,450 @@
+/* ログイン画面 */
+/* フォント設定 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap');
+
+/* レイアウト */
+html {
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", "Meiryo", "ＭＳ　Ｐゴシック", "HelveticaNeue", "Helvetica", "Arial", Sans-Serif;
+}
+
+/* ヘッダー */
+header {
+    flex-shrink: 0;
+}
+
+/* メイン */
+main {
+    flex-grow: 1;
+}
+
+/* フッター */
+footer {
+    flex-shrink: 0;
+    padding: 12px 20px;
+    background-color: #00A08E;
+}
+
+.c_typo_footer {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+/* タイポグラフィ */
+.c_typo_PNK01 {
+    color: #B9477E;
+}
+
+.c_typo_PPL01 {
+    color: #67498D;
+}
+
+.c_typo_BLU01 {
+    color: #5EA1C5;
+}
+
+.c_typo_GRN01 {
+    color: #72AD66;
+}
+
+.c_typo_YEL01 {
+    color: #CA853B;
+}
+
+/* テキストフィールド */
+.c_textField_labelArea {
+    display: flex;
+    align-items: flex-start;
+}
+
+.c_textField_typo_label {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #2E2E2E;
+}
+
+.c_textField_typo_asterisk {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #E53935;
+}
+
+.c_textField_inputArea {
+    padding-top: 8px;
+}
+
+.c_textField_input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #F2FAF9;
+    border-radius: 16px;
+    background-color: #F2FAF9;
+    outline: none;
+    resize: none;
+    cursor: pointer;
+}
+
+.c_textField_typo_input {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #2E2E2E;
+}
+
+.c_textField_typo_input:focus {
+    border: 1px solid #008673;
+}
+
+.c_textField_typo_input::placeholder {
+    color: #585858;
+}
+
+/* ローダー */
+body:has(.c_loader) {
+    position: relative;
+}
+
+.c_loader {
+    position: absolute;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: rgba(0, 134, 115, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+}
+
+.c_loader_hidden {
+    display: none;
+}
+
+.c_loader_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.c_loader_wrapper {
+    position: relative;
+    width: 240px;
+    height: 60px;
+}
+
+.c_loader_circle {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    left: 15%;
+    transform-origin: 50%;
+    animation: circle .5s alternate infinite ease;
+}
+
+@keyframes circle {
+    0% {
+        top: 60px;
+        height: 5px;
+        border-radius: 50px 50px 25px 25px;
+        transform: scaleX(1.7);
+    }
+
+    40% {
+        height: 20px;
+        border-radius: 50%;
+        transform: scaleX(1);
+    }
+
+    100% {
+        top: 0%;
+    }
+}
+
+.c_loader_circle:nth-child(2) {
+    left: 45%;
+    animation-delay: .2s;
+}
+
+.c_loader_circle:nth-child(3) {
+    left: auto;
+    right: 15%;
+    animation-delay: .3s;
+}
+
+.c_loader_shadow {
+    width: 20px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    top: 62px;
+    transform-origin: 50%;
+    z-index: -1;
+    left: 15%;
+    filter: blur(1px);
+    animation: shadow .5s alternate infinite ease;
+}
+
+@keyframes shadow {
+    0% {
+        transform: scaleX(1.5);
+    }
+
+    40% {
+        transform: scaleX(1);
+        opacity: .7;
+    }
+
+    100% {
+        transform: scaleX(.2);
+        opacity: .4;
+    }
+}
+
+.c_loader_shadow:nth-child(4) {
+    left: 45%;
+    animation-delay: .2s
+}
+
+.c_loader_shadow:nth-child(5) {
+    left: auto;
+    right: 15%;
+    animation-delay: .3s;
+}
+
+.c_typo_loaderTitle {
+    position: absolute;
+    top: 75px;
+    left: 0;
+    right: 0;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 12px;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.c_typo_loaderTitle rt {
+    font-size: 0.3em;
+}
+
+/* コンポーネント：ダイアログ */
+.c_dialog {
+    display: flex;
+}
+
+/* bodyスクロール制御 */
+.c_dialog_bodyScroll {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
+    position: fixed;
+    left: 0;
+}
+
+.c_dialog_showModal {
+    cursor: pointer;
+}
+
+/* ダイアログ背景 */
+.c_dialog_modal {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s cubic-bezier(0, 0.2, 0.4, 1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.c_dialog_inner {
+    background-color: #FFFFFF;
+    border-radius: 24px;
+    /* スクロールの調整のため右・下paddingをc_modal01_textAreaと分割 */
+    padding: 32px 12px 30px 0;
+    width: 90vw;
+    max-width: 592px;
+    min-width: 328px;
+    max-height: 90%;
+    position: relative;
+    cursor: default;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* PC表示 */
+@media (min-width: 760px) {
+    .c_dialog_inner {
+        max-height: 680px;
+    }
+}
+
+/* ダイアログテキストエリア */
+.c_dialog_textArea {
+    overflow-y: auto;
+    overflow-x: hidden;
+    line-height: 1.5;
+    /*モーダル内スクロールの調整のため右・下paddingをc_modal01_innerと分割 */
+    padding: 0 12px 2px 24px;
+}
+
+/* PC表示 */
+@media (min-width: 760px) {
+    .c_dialog_textArea {
+        /* ダイアログボックスの最大の高さ（680px）からパディング要素（64px）を引いた値 */
+        max-height: 616px;
+    }
+}
+
+/* 閉じるアイコン（×ボタン） */
+.c_dialog_CloseBtn {
+    position: absolute;
+    right: -16px;
+    top: -24px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}
+
+/* ダイアログ表示用クラス */
+.c_dialog_isShow {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* ×ボタンクローズ非表示用クラス */
+.c_dialog_hidden_closeBtn .c_dialog_CloseBtn {
+    display: none;
+}
+
+/* 背景押下制御用クラス */
+.c_dialog .c_dialog_modal_disable {
+    cursor: default;
+}
+
+/* ノーティフィケーション */
+.c_notification {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px;
+    border-radius: 16px;
+    background-color: #FFE0E0;
+}
+
+.c_notification:focus {
+    border: #E53935;
+}
+
+.c_notification>svg {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.c_notification_text {
+    flex-grow: 1;
+    padding-left: 8px;
+}
+
+.c_notification_typo_text {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #2E2E2E;
+}
+
+.c_notification_closeBtn {
+    padding-left: 8px;
+}
+
+/* ノーティフィケーション2 */
+.c_notification02 {
+    display: block;
+    padding: 8px;
+    border-radius: 16px;
+    background-color: #FDEBCC;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.c_notification02_titleArea {
+    display: flex;
+    align-items: center;
+}
+
+.c_notification02_exclamationIcon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background-image: url('../p_image/exclamation_orange.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.c_notification02_title {
+    flex-grow: 1;
+    padding-left: 8px;
+}
+
+.c_notification02_typo_title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #2E2E2E;
+}
+
+.c_notification02_contentArea {
+    padding: 8px 12px 0 12px;
+}
+
+.c_notification02_typo_content {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #2E2E2E;
+}
+
+.c_notification02_textLink {
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+}
+
+.c_notification02_typo_textLink {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #008673;
+}
+
+.c_notification02_typo_textLink:visited {
+    color: #99D6CD;
+}
+
+.c_notification02_nextArrowIcon {
+    flex-shrink: 0;
+    padding-left: 8px;
+}
