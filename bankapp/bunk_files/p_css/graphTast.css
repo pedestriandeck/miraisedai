@@ -1,0 +1,91 @@
+/* プロトサンプル用CSS設定　開始 */
+
+table,
+td,
+th {
+    border: 0.1rem solid #595959;
+}
+
+td,
+th {
+    padding: 0.4rem 0.8rem;
+}
+
+th {
+    background: #CCEBE6;
+}
+
+/* プロトサンプル用CSS設定　終了 */
+
+/* キャンバスエリア */
+.pt_graph03 {
+    width: 59.2rem;
+    height: 20rem;
+    position: relative;
+}
+
+/* キャンバスエリア */
+.pt_graph03_canvasArea {
+    height: 100%;
+    padding: 0.8rem 0 2.4rem 2.4rem;
+}
+
+.pt_graph03_canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* X軸ラベルエリア */
+.pt_graph03_XlabelArea {
+    width: 100%;
+    display: flex;
+    padding: 0.8rem 0 0 2.4rem;
+}
+
+.pt_graph03_goodText {
+    padding-right: 0.8rem;
+    flex-shrink: 0;
+}
+
+.pt_graph03_Xlabel {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.pt_graph03_Xlabel>div {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.pt_graph03_bar {
+    width: 2.0rem;
+    height: 0.6rem;
+    border-radius: 0.3rem;
+}
+
+.pt_graph03_badText {
+    padding-left: 0.8rem;
+    flex-shrink: 0;
+}
+
+/* Y軸ラベル */
+.pt_graph03_YlabelArea {
+    height: 100%;
+    width: 100%;
+    padding: 0.8rem 0.8rem 2.4rem 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.pt_graph03_Ylabel {
+    height: 4.8rem;
+}
+
+.pt_graph03_Ylabel>p {
+    display: flex;
+    justify-content: end;
+    transform: translateY(-50%);
+}
