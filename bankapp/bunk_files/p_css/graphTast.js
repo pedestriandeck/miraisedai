@@ -5,11 +5,11 @@ const fileData = [{
             // 横軸の色とデータ
             "column": [
                 {
-                    "data": 0,
+                    "data": 2,
                     "color": "#5993EB"
                 },
                 {
-                    "data": 2,
+                    "data": 0,
                     "color": "#4DABEF"
                 },
                 {
@@ -25,7 +25,7 @@ const fileData = [{
                     "color": "#F0D800"
                 },
                 {
-                    "data": 18,
+                    "data": 40,
                     "color": "#FABF00"
                 },
                 {
@@ -37,11 +37,11 @@ const fileData = [{
                     "color": "#F28300"
                 },
                 {
-                    "data": 5,
+                    "data": -10,
                     "color": "#F15D78"
                 },
                 {
-                    "data": 9,
+                    "data": -3,
                     "color": "#E53935"
                 }
             ],
@@ -67,8 +67,7 @@ const fileData = [{
             "graph": [
                 {
                     "min": -10,
-                    "max": 30,
-                    "currentValue": 7
+                    "max": 30
                 }
             ]
         }
@@ -98,7 +97,7 @@ function createGraph03(jsonData, target) {
     // 縦軸のデータの個数分繰り返す
     for (let i = 0; i < jsonData.row.length; i++) {
         // 値が0の要素か判定
-        if (jsonData.row[i].label == 20) {
+        if (jsonData.row[i].label == Number(jsonData.row[jsonData.row.length - 1].label) + Number(jsonData.row[0].label)) {
             // 0の横線は太さが2pxで、線端がroundのため1px調整
             drawStrokeLine(context, 1, heightPerOne * (jsonData.row[i].label - jsonData.graph[0].min), width - 1, heightPerOne * (jsonData.row[i].label - jsonData.graph[0].min), '#D5D5D5', 2, 'round', false);
         } else {
@@ -118,26 +117,41 @@ function createGraph03(jsonData, target) {
     // 横軸のデータの個数分繰り返す
     for (let i = 0; i < jsonData.column.length; i++) {
         let color;
-        // 現在値がi+1と同じか判定
-        if ((i + 1) == jsonData.graph[0].currentValue) {
-            // 同じ場合、該当の色を設定
-            color = jsonData.column[i].color;
-        } else {
-            color = '#D5D5D5';
+        // 正の値なら青に、負の値なら赤に設定
+        if (jsonData.column[i].data > 0) {
+            color = '#5ea1c5';
+        } else if (jsonData.column[i].data < 0) {
+            color = '#e84f4c';
         }
 
         // 棒グラフの縦軸の座標（Y座標）
         let Ycoordinate = heightPerOne * (jsonData.graph[0].max - jsonData.column[i].data);
-        // データが最大値か判定
-        if (jsonData.column[i].data == jsonData.graph[0].max) {
+        // データが最大値以上か判定
+        if (jsonData.column[i].data > jsonData.graph[0].max - 2) {
+            // 上限値に設定
             // グラフが一番上の横線と重ならないように2px調整
-            Ycoordinate = Ycoordinate + 2;
+            Ycoordinate = 2;
+        }
+        // データが最小値以下か判定
+        if (jsonData.column[i].data < jsonData.graph[0].min + 2) {
+            // 下限値に設定
+            // グラフが一番下の横線と重ならないように2px調整
+            Ycoordinate = 198;
         }
 
         // データが0以外の場合、棒グラフの線を描画する
         if (jsonData.column[i].data != 0) {
             // 2pxで描画するため7px調整、横線に重ならないように調整（1と3の部分）
-            drawTwoCornerRoundedLine(context, XCoordinate[i] + 7, heightPerOne * (jsonData.row[3].label - jsonData.graph[0].min) - 3, XCoordinate[i] - 7, Ycoordinate + 1, 2, color, color, 2, false);
+            drawTwoCornerRoundedLine(context, XCoordinate[i] + 7, heightPerOne * (jsonData.row[3].label - jsonData.graph[0].min), XCoordinate[i] - 7, Ycoordinate + 1, 2, color, color, 2, false);
+        }
+        console.log(XCoordinate[i] - 7 + 'px', Ycoordinate + 1 + 'px');
+        const box = document.getElementsByClassName('box')[0];
+        if (jsonData.column[i].data >= 0) {
+            box.style.top = Ycoordinate + 50 + 'px';
+            box.style.left = XCoordinate[i] + 15 + 'px';
+        } else if (jsonData.column[i].data < 0) {
+            box.style.top = Ycoordinate + 80 + 'px';
+            box.style.left = XCoordinate[i] + 15 + 'px';
         }
     }
 }
@@ -272,7 +286,7 @@ function createGraph03_Element(jsonData, target) {
 
         // タイポ
         let Ylabel_typo = document.createElement('p');
-        Ylabel_typo.className = 'c_typo_headerXXS c_typo_BLK8 c_typo_align_right';
+        Ylabel_typo.className = 'yLabel';
         Ylabel_typo.innerText = jsonData.row[i].label;
 
         Ylabel.appendChild(Ylabel_typo);
@@ -281,33 +295,18 @@ function createGraph03_Element(jsonData, target) {
     target.appendChild(YlabelArea);
 }
 
-// =====Element位置設定======================================================
-// target：対象グラフ
-// ==========================================================================
-function setGraph03_Element(target) {
-    let rootfont = document.documentElement.style.fontSize.replace('px', '');
-    if (rootfont == '') {
-        rootfont = getComputedStyle(document.documentElement).fontSize.replace('px', '');
-    }
-    let graph03_canvas = target.getElementsByClassName('pt_graph03_canvas')[0];
-    // 縦軸ラベルの位置設定
-    target.getElementsByClassName('pt_graph03_YlabelArea')[0].style.right = graph03_canvas.offsetWidth / rootfont + 'rem';
-}
-
 const graph03 = document.getElementsByClassName('pt_graph03');
 // ページ読み込み時にイベント登録
 window.addEventListener('DOMContentLoaded', function () {
     // グラフ生成処理呼び出し
     for (let i = 0; i < graph03.length; i++) {
         createGraph03_Element(fileData[0].graphData[i], graph03[i]);
-        setGraph03_Element(graph03[i]);
         createGraph03(fileData[0].graphData[i], graph03[i]);
     }
 });
 // リサイズ時にイベント登録
 window.addEventListener('resize', function () {
     for (let i = 0; i < graph03.length; i++) {
-        setGraph03_Element(graph03[i]);
         createGraph03(fileData[0].graphData[i], graph03[i]);
     }
 });

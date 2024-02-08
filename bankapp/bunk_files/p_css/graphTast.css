@@ -3,12 +3,12 @@
 table,
 td,
 th {
-    border: 0.1rem solid #595959;
+    border: 1px solid #595959;
 }
 
 td,
 th {
-    padding: 0.4rem 0.8rem;
+    padding: 4px 8px;
 }
 
 th {
@@ -17,17 +17,31 @@ th {
 
 /* プロトサンプル用CSS設定　終了 */
 
+.spacing {
+    padding: 40px;
+}
+
+.box {
+    display: inline-block;
+    /* background-color: #87a5f8; */
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* キャンバスエリア */
 .pt_graph03 {
-    width: 59.2rem;
-    height: 20rem;
+    width: 600px;
+    height: 200px;
     position: relative;
 }
 
 /* キャンバスエリア */
 .pt_graph03_canvasArea {
     height: 100%;
-    padding: 0.8rem 0 2.4rem 2.4rem;
+    padding: 8px 0 24px 36px;
 }
 
 .pt_graph03_canvas {
@@ -39,11 +53,11 @@ th {
 .pt_graph03_XlabelArea {
     width: 100%;
     display: flex;
-    padding: 0.8rem 0 0 2.4rem;
+    padding: 8px 0 0 24px;
 }
 
 .pt_graph03_goodText {
-    padding-right: 0.8rem;
+    padding-right: 8px;
     flex-shrink: 0;
 }
 
@@ -60,13 +74,13 @@ th {
 }
 
 .pt_graph03_bar {
-    width: 2.0rem;
-    height: 0.6rem;
-    border-radius: 0.3rem;
+    width: 20px;
+    height: 6px;
+    border-radius: 3px;
 }
 
 .pt_graph03_badText {
-    padding-left: 0.8rem;
+    padding-left: 8px;
     flex-shrink: 0;
 }
 
@@ -74,18 +88,17 @@ th {
 .pt_graph03_YlabelArea {
     height: 100%;
     width: 100%;
-    padding: 0.8rem 0.8rem 2.4rem 0;
+    padding: 8px 8px 24px 0;
     position: absolute;
     top: 0;
-    right: 0;
+    left: 8px;
 }
 
 .pt_graph03_Ylabel {
-    height: 4.8rem;
+    height: 50px;
 }
 
-.pt_graph03_Ylabel>p {
-    display: flex;
-    justify-content: end;
+.yLabel {
+    margin: 0;
     transform: translateY(-50%);
 }
