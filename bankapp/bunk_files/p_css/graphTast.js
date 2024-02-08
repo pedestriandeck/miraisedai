@@ -246,7 +246,6 @@ function createGraph_Element(jsonData, target) {
     goodText.classList.add('graph_goodText');
     // タイポ
     let goodText_typo = document.createElement('p');
-    goodText_typo.className = 'c_typo_headerXXS c_typo_BLK8 c_typo_align_center';
     goodText_typo.innerText = 'Good';
     goodText.appendChild(goodText_typo);
     XlabelArea.appendChild(goodText);
@@ -271,7 +270,6 @@ function createGraph_Element(jsonData, target) {
     badText.classList.add('graph_badText');
     // タイポ
     let badText_typo = document.createElement('p');
-    badText_typo.className = 'c_typo_headerXXS c_typo_BLK8 c_typo_align_center';
     badText_typo.innerText = 'Bad';
     badText.appendChild(badText_typo);
     XlabelArea.appendChild(badText);
