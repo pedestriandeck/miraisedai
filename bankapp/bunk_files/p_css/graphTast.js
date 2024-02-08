@@ -78,15 +78,15 @@ const fileData = [{
 // jsonData：JSONファイルデータ
 // target：対象グラフ
 // ==========================================================================
-function createGraph03(jsonData, target) {
+function createGraph(jsonData, target) {
     // キャンバス設定
-    const graph03_canvas = target.getElementsByClassName('pt_graph03_canvas')[0];
-    const context = graph03_canvas.getContext('2d');
+    const graph_canvas = target.getElementsByClassName('canvas')[0];
+    const context = graph_canvas.getContext('2d');
     // グラフ領域
-    graph03_canvas.width = graph03_canvas.offsetWidth;
-    graph03_canvas.height = graph03_canvas.offsetHeight;
-    const width = graph03_canvas.offsetWidth;
-    const height = graph03_canvas.offsetHeight;
+    graph_canvas.width = graph_canvas.offsetWidth;
+    graph_canvas.height = graph_canvas.offsetHeight;
+    const width = graph_canvas.offsetWidth;
+    const height = graph_canvas.offsetHeight;
 
     // 縦軸の値1に対しての高さ
     const heightPerOne = height / (jsonData.graph[0].max - jsonData.graph[0].min);
@@ -106,8 +106,8 @@ function createGraph03(jsonData, target) {
     }
 
     // 棒グラフを描画する
-    const good = target.getElementsByClassName('pt_graph03_goodText')[0].offsetWidth;
-    const bad = target.getElementsByClassName('pt_graph03_badText')[0].offsetWidth;
+    const good = target.getElementsByClassName('graph_goodText')[0].offsetWidth;
+    const bad = target.getElementsByClassName('graph_badText')[0].offsetWidth;
     const fluctuationArea = width - good - bad;   // グラフの変動領域
 
     // 各横軸ラベルのX座標を左から順に配列に格納
@@ -235,15 +235,15 @@ function drawTwoCornerRoundedLine(context, x1, y1, x2, y2, borderRadius, strokeC
 // jsonData：JSONファイルデータ
 // target：対象グラフ
 // ==========================================================================
-function createGraph03_Element(jsonData, target) {
+function createGraph_Element(jsonData, target) {
 
     // X軸ラベルの作成
     const XlabelArea = document.createElement('div');
-    XlabelArea.classList.add('pt_graph03_XlabelArea');
+    XlabelArea.classList.add('graph_XlabelArea');
 
     // 「Good」テキスト
     const goodText = document.createElement('div');
-    goodText.classList.add('pt_graph03_goodText');
+    goodText.classList.add('graph_goodText');
     // タイポ
     let goodText_typo = document.createElement('p');
     goodText_typo.className = 'c_typo_headerXXS c_typo_BLK8 c_typo_align_center';
@@ -253,12 +253,12 @@ function createGraph03_Element(jsonData, target) {
 
     // X軸ラベル
     const Xlabel = document.createElement('div');
-    Xlabel.classList.add('pt_graph03_Xlabel');
+    Xlabel.classList.add('graph_Xlabel');
     for (let i = 0; i < jsonData.column.length; i++) {
         // X軸のbar
         const Xlabel_div = document.createElement('div');
         const Xlabel_bar = document.createElement('div');
-        Xlabel_bar.classList.add('pt_graph03_bar');
+        Xlabel_bar.classList.add('graph_bar');
         Xlabel_bar.style.backgroundColor = jsonData.column[i].color;
 
         Xlabel_div.appendChild(Xlabel_bar);
@@ -268,7 +268,7 @@ function createGraph03_Element(jsonData, target) {
 
     // 「Bad」テキスト
     const badText = document.createElement('div');
-    badText.classList.add('pt_graph03_badText');
+    badText.classList.add('graph_badText');
     // タイポ
     let badText_typo = document.createElement('p');
     badText_typo.className = 'c_typo_headerXXS c_typo_BLK8 c_typo_align_center';
@@ -279,10 +279,10 @@ function createGraph03_Element(jsonData, target) {
 
     // Y軸ラベルの作成
     const YlabelArea = document.createElement('div');
-    YlabelArea.classList.add('pt_graph03_YlabelArea');
+    YlabelArea.classList.add('graph_YlabelArea');
     for (let i = jsonData.row.length - 1; i >= 0; i--) {
         const Ylabel = document.createElement('div');
-        Ylabel.classList.add('pt_graph03_Ylabel');
+        Ylabel.classList.add('graph_Ylabel');
 
         // タイポ
         let Ylabel_typo = document.createElement('p');
@@ -295,18 +295,18 @@ function createGraph03_Element(jsonData, target) {
     target.appendChild(YlabelArea);
 }
 
-const graph03 = document.getElementsByClassName('pt_graph03');
+const graph = document.getElementsByClassName('graph');
 // ページ読み込み時にイベント登録
 window.addEventListener('DOMContentLoaded', function () {
     // グラフ生成処理呼び出し
-    for (let i = 0; i < graph03.length; i++) {
-        createGraph03_Element(fileData[0].graphData[i], graph03[i]);
-        createGraph03(fileData[0].graphData[i], graph03[i]);
+    for (let i = 0; i < graph.length; i++) {
+        createGraph_Element(fileData[0].graphData[i], graph[i]);
+        createGraph(fileData[0].graphData[i], graph[i]);
     }
 });
 // リサイズ時にイベント登録
 window.addEventListener('resize', function () {
-    for (let i = 0; i < graph03.length; i++) {
-        createGraph03(fileData[0].graphData[i], graph03[i]);
+    for (let i = 0; i < graph.length; i++) {
+        createGraph(fileData[0].graphData[i], graph[i]);
     }
 });
