@@ -13,13 +13,60 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
+    min-height: 100svh;
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", "Meiryo", "ＭＳ　Ｐゴシック", "HelveticaNeue", "Helvetica", "Arial", Sans-Serif;
 }
 
 /* ヘッダー */
 header {
     flex-shrink: 0;
+}
+
+.c_headerContent {
+    display: flex;
+    align-items: center;
+    padding: 4px 12px;
+}
+
+.c_headerContent>p {
+    flex-grow: 1;
+}
+
+.c_headerContent>a {
+    flex-shrink: 0;
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+
+.c_typo_header {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #2E2E2E;
+}
+
+/* ヘッダーバー */
+.c_headerBar {
+    height: 8px;
+}
+
+.c_headerBar_GRN {
+    background-color: #008673;
+}
+
+.c_headerBar_BLU {
+    background-color: #2196F3;
+}
+
+.c_headerBar_left {
+    width: 30%;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+}
+
+.c_headerBar_YEL {
+    background-color: #FABF00;
 }
 
 /* メイン */
@@ -95,7 +142,6 @@ footer {
     background-color: #F2FAF9;
     outline: none;
     resize: none;
-    cursor: pointer;
 }
 
 .c_textField_typo_input {
@@ -234,13 +280,25 @@ body:has(.c_loader) {
     font-size: 20px;
     font-weight: 700;
     line-height: 28px;
-    letter-spacing: 12px;
+    letter-spacing: 1em;
     color: #FFFFFF;
     text-align: center;
 }
 
+.c_typo_loaderTitle>span {
+    text-align: center;
+}
+
 .c_typo_loaderTitle rt {
-    font-size: 0.3em;
+    font-size: 0.4em;
+    letter-spacing: 0.2em;
+}
+
+@media (min-width: 760px) {
+    .c_typo_loaderTitle {
+        font-size: 24px;
+        line-height: 32px;
+    }
 }
 
 /* コンポーネント：ダイアログ */
@@ -447,4 +505,55 @@ body:has(.c_loader) {
 .c_notification02_nextArrowIcon {
     flex-shrink: 0;
     padding-left: 8px;
+}
+
+/* トップへリンクセクション */
+.c_linkSec {
+    display: flex;
+    padding: 24px 0 24px 30px;
+    background-color: #FFFFFF;
+}
+
+@media (min-width: 760px) {
+    .c_linkSec {
+        padding: 32px 0 32px calc(((100vw - 760px) / 1160) * 320);
+    }
+}
+
+/* テキストリンク */
+.c_textLink {
+    display: flex;
+}
+
+.c_textLink>a {
+    display: flex;
+    align-items: center;
+}
+
+.c_textLink svg {
+    flex-shrink: 0;
+    margin: 4px;
+    width: 16px;
+    height: 16px;
+}
+
+.c_typo_textLink {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #1E88E5;
+}
+
+@media (min-width: 760px) {
+    .c_textLink0>a {
+        transition: cubic-bezier(0, 0.2, 0.4, 1) 200ms;
+    }
+
+    .c_textLink a:hover {
+        background-color: #BBDEFB;
+    }
+
+    .c_textLink a:hover p {
+        color: #1E88E5;
+    }
 }

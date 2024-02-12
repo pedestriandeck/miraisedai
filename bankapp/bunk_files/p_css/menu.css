@@ -1,42 +1,4 @@
 /** メニュー選択 **/
-/* ヘッダー */
-.bm_headerContent {
-    display: flex;
-    align-items: center;
-    padding: 4px 12px;
-}
-
-.bm_headerContent>p {
-    flex-grow: 1;
-}
-
-.bm_headerContent>a {
-    flex-shrink: 0;
-    display: block;
-    width: 48px;
-    height: 48px;
-}
-
-.bm_typo_header {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 38px;
-    color: #2E2E2E;
-}
-
-/* ヘッダーバー */
-.bm_headerBar_GRN {
-    height: 8px;
-    background-color: #008673;
-}
-
-.bm_headerBar_YEL {
-    width: 30%;
-    height: 100%;
-    border-radius: 0 4px 4px 0;
-    background-color: #FABF00;
-}
-
 /* メイン */
 main {
     display: flex;
