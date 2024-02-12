@@ -60,7 +60,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         // 指定されたURLにリクエストを送信
         fetch(appUrl, postparam).then(function () {
-            location.href = './accountConfirm.html?' + hash;
+            location.href = setQueryParams('./accountConfirm.html', { "transmission": hash });
         }).catch(function (error) {
             console.log(error);
             window.alert(error);
