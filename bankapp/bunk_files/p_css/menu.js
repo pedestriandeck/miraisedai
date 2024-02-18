@@ -68,17 +68,15 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-
 /* ログアウト */
-const logoutLink = document.getElementById('bm_logoutLink');
-logoutLink.addEventListener('click', logout);
-function logout() {
+const logoutLink = document.getElementById('c_logoutLink');
+
+logoutLink.addEventListener('click', function () {
     let result = window.confirm('ほんとうにログアウトしますか？\n※ログインがめんにもどります');
     if (result) {
         this.href = './login.html';
     }
-}
+});
 
 /* フォームへ遷移時にIDをクエリパラメータとして付与 */
 window.addEventListener('DOMContentLoaded', function () {

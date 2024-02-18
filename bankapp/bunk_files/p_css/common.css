@@ -3,29 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400&display=swap');
 
 /* レイアウト */
-html {
-    font-family: 'Noto Sans JP', sans-serif;
-    min-height: 100vh;
-    min-height: calc(var(--vh, 1vh) * 100);
-}
-
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    min-height: 100svh;
+    height: 100vh;
+    height: 100dvh;
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ", "Meiryo", "ＭＳ　Ｐゴシック", "HelveticaNeue", "Helvetica", "Arial", Sans-Serif;
 }
 
 /* ヘッダー */
-header {
-    flex-shrink: 0;
-}
-
 .c_headerContent {
     display: flex;
     align-items: center;
     padding: 4px 12px;
+    background-color: #FFFFFF;
 }
 
 .c_headerContent>p {
@@ -69,14 +58,8 @@ header {
     background-color: #FABF00;
 }
 
-/* メイン */
-main {
-    flex-grow: 1;
-}
-
 /* フッター */
 footer {
-    flex-shrink: 0;
     padding: 12px 20px;
     background-color: #00A08E;
 }
@@ -89,7 +72,177 @@ footer {
     color: #FFFFFF;
 }
 
-/* タイポグラフィ */
+/* コンポーネント：Typography */
+.c_typo_headerXXS {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+}
+
+.c_typo_headerXS {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.c_typo_headerS {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.c_typo_headerM {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 700;
+}
+
+.c_typo_headerL {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+}
+
+.c_typo_headerXL {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.c_typo_bodyXS {
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: 400;
+}
+
+.c_typo_bodyS {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.c_typo_bodyM {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.c_typo_bodyL {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+}
+
+.c_typo_cta {
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+}
+
+.c_typo_ctaS {
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: 700;
+}
+
+.c_typo_numberL {
+    font-size: 42px;
+    line-height: 42px;
+    font-weight: 700;
+}
+
+/* PC表示 */
+@media (min-width: 760px) {
+    .c_typo_headerXS {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .c_typo_headerS {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .c_typo_headerM {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+    .c_typo_headerL {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .c_typo_headerXL {
+        font-size: 42px;
+        line-height: 50px;
+    }
+
+    .c_typo_bodyM {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .c_typo_bodyL {
+        font-size: 24px;
+        line-height: 36px;
+    }
+
+    .c_typo_numberL {
+        font-size: 50px;
+        line-height: 50px;
+    }
+}
+
+/* color */
+.c_typo_BLK10 {
+    color: #2E2E2E;
+}
+
+.c_typo_BLK8 {
+    color: #585858;
+}
+
+.c_typo_BLK6 {
+    color: #939393;
+}
+
+.c_typo_BLK4 {
+    color: #D5D5D5;
+}
+
+.c_typo_BLK2 {
+    color: #F0F0F0;
+}
+
+.c_typo_BLK1 {
+    color: #FAFAFA;
+}
+
+.c_typo_GRN16 {
+    color: #003D34;
+}
+
+.c_typo_GRN10 {
+    color: #008673;
+}
+
+.c_typo_RED100 {
+    color: #9C2F2F;
+}
+
+.c_typo_WHT {
+    color: #FFFFFF;
+}
+
+.c_typo_ERROR {
+    color: #E53935;
+}
+
+.c_typo_ORG120 {
+    color: #F29F00;
+}
+
 .c_typo_PNK01 {
     color: #B9477E;
 }
@@ -108,6 +261,46 @@ footer {
 
 .c_typo_YEL01 {
     color: #CA853B;
+}
+
+/* 左右中央寄せ */
+.c_typo_align_left {
+    text-align: left;
+}
+
+.c_typo_align_center {
+    text-align: center;
+}
+
+.c_typo_align_right {
+    text-align: right;
+}
+
+.c_typo_align_left,
+.c_typo_align_center,
+.c_typo_align_right {
+    word-break: break-all;
+}
+
+@media (min-width: 760px) {
+    .c_typo_alignPC_left {
+        text-align: left;
+    }
+
+    .c_typo_alignPC_center {
+        text-align: center;
+    }
+
+    .c_typo_alignPC_right {
+        text-align: right;
+    }
+}
+
+/* 一行表示 */
+.c_typo_oneLine {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /* テキストフィールド */
@@ -299,6 +492,48 @@ body:has(.c_loader) {
         font-size: 24px;
         line-height: 32px;
     }
+}
+
+/* コンポーネント：ボタン */
+.c_button {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: 3px solid #008673;
+    border-radius: 24px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+    transition: cubic-bezier(0, 0.2, 0.4, 1) 200ms;
+}
+
+.c_button_green {
+    background-color: #008673;
+}
+
+.c_button_white {
+    background-color: #FFFFFF;
+}
+
+@media (min-width: 760px) {
+    .c_button:hover {
+        background-color: #CCEBE6;
+    }
+
+    .c_button:hover p {
+        color: #008673;
+    }
+}
+
+/* ボタン非活性時 */
+.c_button_disabled {
+    border: 3px solid #D5D5D5;
+    background-color: #D5D5D5;
+    box-shadow: none;
+    transform: translateY(4px);
+    pointer-events: none;
+}
+
+.c_button_disabled p {
+    color: #939393;
 }
 
 /* コンポーネント：ダイアログ */

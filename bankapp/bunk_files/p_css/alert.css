@@ -1,6 +1,6 @@
 /** 警告 **/
-/* メイン */
-main {
+/* ボディ */
+body {
     background-color: #CCE2F2;
 }
 
@@ -121,5 +121,5 @@ main {
 
 /* 警告エリア */
 .ba_alertArea {
-    padding: 24px 20px 32px;
+    padding: 24px 20px 0;
 }

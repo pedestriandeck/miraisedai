@@ -1,6 +1,5 @@
 /** ログイン **/
-/* メイン */
-main {
+body {
     background-color: #FEF2CC;
 }
 
@@ -103,7 +102,7 @@ main {
 
 /* ログインフォームエリア */
 .bl_loginFormArea {
-    padding: 24px 20px 32px;
+    padding: 24px 20px 0;
 }
 
 .bl_typo_formTitle {
@@ -115,12 +114,12 @@ main {
 }
 
 .bl_textFieldArea {
-    padding-top: 16px;
+    padding-top: 24px;
 }
 
 .bl_loginErrorArea {
     display: none;
-    padding-top: 24px;
+    padding-top: 8px;
 }
 
 .bl_showLoginError {
@@ -128,23 +127,13 @@ main {
 }
 
 .bl_loginBtnArea {
-    padding-top: 24px;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
 }
 
-.bl_loginBtn {
-    display: block;
+.bl_loginBtnWidth {
     width: 280px;
-    margin: 0 auto;
-    padding: 16px 24px;
-    border-radius: 24px;
-    background-color: #008673;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-.bl_clickedLoginBtn {
-    background-color: #585858;
-    box-shadow: none;
-    transform: translateY(4px);
 }
 
 .bl_typo_loginBtn {
@@ -157,7 +146,7 @@ main {
 
 @media (min-width: 760px) {
     .bl_loginFormArea {
-        padding: 32px 0 48px;
+        padding: 32px 0 0;
     }
 
     .bl_loginFormArea>.bl_container {
@@ -172,7 +161,7 @@ main {
 
 /* 選択エリア */
 .bl_confirmArea {
-    padding-top: 16px;
+    padding-top: 24px;
 }
 
 .bl_typo_confirm {
@@ -189,52 +178,13 @@ main {
 .bl_confirmBtnArea {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding-top: 24px;
+    padding: 40px 0;
 }
 
-.bl_confirmBtnArea>li {
-    flex-grow: 1;
-    width: 50%;
+.bl_confirmBtnArea>div:last-child {
+    margin-left: 16px;
 }
 
-.bl_confirmBtnArea>li:first-child {
-    padding-right: 16px;
-}
-
-.bl_confirmBtnArea>li:last-child {
-    padding-left: 16px;
-}
-
-.bl_agreeBtn {
-    width: 100%;
-    padding: 16px 24px;
-    border-radius: 24px;
-    background-color: #008673;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-.bl_typo_agreeBtn {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.bl_disagreeBtn {
-    width: 100%;
-    padding: 15px 24px;
-    border: 1px solid #008673;
-    border-radius: 24px;
-    background-color: #FFFFFF;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-.bl_typo_disagreeBtn {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    color: #008673;
-    text-align: center;
+.bl_agreeBtnWidth, .bl_disagreeBtnWidth {
+    flex-basis: 100%;
 }

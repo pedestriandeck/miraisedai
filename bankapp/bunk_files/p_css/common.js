@@ -46,19 +46,6 @@ function showLoader() {
     }
 }
 
-// 画面読み込み時にメインの高さを設定
-window.addEventListener('load', setScreenHeight);
-// 画面リサイズ時にメインの高さを設定
-window.addEventListener('resize', setScreenHeight);
-
-// メインの高さを設定
-function setScreenHeight() {
-    // 最初に、ビューポートの高さを取得し、0.01を掛けて1%の値を算出して、vh単位の値を取得
-    let vh = window.innerHeight * 0.01;
-    // カスタム変数--vhの値をドキュメントのルートに設定
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-}
-
 /* アイコン移動 */
 if (document.getElementsByClassName('c_moveIcon')) {
     // アイコン要素の取得
@@ -100,6 +87,19 @@ if (document.getElementsByClassName('c_moveIcon')) {
         });
     }
 }
+
+/** コンポーネント：ボタン **/
+window.addEventListener('DOMContentLoaded', function () {
+    if (document.getElementsByClassName('c_button')) {
+        const btn = document.getElementsByClassName('c_button');
+        for (let i = 0; i < btn.length; i++) {
+            if (btn[i].classList.contains('c_button_disabled')) {
+                btn[i].tabIndex = -1;
+            }
+        }
+    }
+});
+
 
 /** コンポーネント：ダイアログ **/
 if (!document.getElementsByClassName('c_dialog').length) {

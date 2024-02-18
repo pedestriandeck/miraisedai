@@ -1,13 +1,11 @@
 /** メニュー選択 **/
-/* メイン */
-main {
-    display: flex;
-    flex-direction: column;
+/* ボディ */
+body {
+    background-color: #FEF2CC;
 }
 
 /* 詳細エリア */
 .bm_detailArea {
-    flex-shrink: 0;
     padding: 16px 20px;
     background-color: #FFFFFF;
 }
@@ -74,10 +72,7 @@ main {
 
 /* メニューエリア */
 .bm_menuArea {
-    flex-grow: 1;
     padding: 32px 36px;
-    background-color: #FEF2CC;
-    box-shadow: 4px 4px 4px 4px rgba(255, 255, 255, 0.8);
 }
 
 .bm_menuList {

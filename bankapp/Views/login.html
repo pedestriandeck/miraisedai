@@ -7,10 +7,10 @@
     <meta http-equiv="Pragma" content="no-cache">
     <title>あそび大学こども銀行 | ログイン</title>
     <!-- 共通CSS -->
-    <link rel="stylesheet" href="../bunk_files/p_css/reset.css?20230822">
-    <link rel="stylesheet" href="../bunk_files/p_css/common.css?20230822">
+    <link rel="stylesheet" href="../bunk_files/p_css/reset.css?20240219">
+    <link rel="stylesheet" href="../bunk_files/p_css/common.css?20240219">
     <!-- 画面個別CSS -->
-    <link rel="stylesheet" href="../bunk_files/p_css/login.css?20230822">
+    <link rel="stylesheet" href="../bunk_files/p_css/login.css?20240219">
 </head>
 
 <body>
@@ -63,14 +63,14 @@
                                 <p class="c_textField_typo_asterisk">&#42;</p>
                             </div>
                             <div class="c_textField_inputArea">
-                                <input type="number" placeholder="にゅうりょくしてください" id="bl_textField"
-                                    class="c_textField_input c_textField_typo_input">
+                                <input inputmode="numeric" maxlength="5" placeholder="にゅうりょくしてください"
+                                    autocomplete="username" class="c_textField_input c_textField_typo_input"
+                                    id="bl_userId">
                             </div>
                         </div>
                     </div>
                     <div class="bl_loginErrorArea">
-                        <div class="c_notification">
-                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                        <div class="c_notification"><svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
                                 style="width: 24px; height: 24px;" xml:space="preserve">
                                 <g>
@@ -100,9 +100,11 @@
                         </div>
                     </div>
                     <div class="bl_loginBtnArea">
-                        <button id="bl_loginBtn" class="bl_loginBtn">
-                            <p class="bl_typo_loginBtn">ログイン</p>
-                        </button>
+                        <div class="bl_loginBtnWidth">
+                            <a href="javascript:void(0);" class="c_button c_button_green" id="bl_loginBtn">
+                                <p class="c_typo_cta c_typo_WHT c_typo_align_center">ログイン</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div id="bl_confirmMode" class="bl_hidden">
@@ -110,25 +112,25 @@
                         <p class="bl_typo_confirm">あなたのニックネームは、<br>「<span id="bl_nickname"
                                 class="bl_highlight"></span>」さんですか？</p>
                     </div>
-                    <ul class="bl_confirmBtnArea">
-                        <li>
-                            <button id="bl_agreeBtn" class="bl_agreeBtn">
-                                <p class="bl_typo_agreeBtn">はい</p>
-                            </button>
-                        </li>
-                        <li>
-                            <button id="bl_disagreeBtn" class="bl_disagreeBtn">
-                                <p class="bl_typo_disagreeBtn">いいえ</p>
-                            </button>
-                        </li>
-                    </ul>
+                    <div class="bl_confirmBtnArea">
+                        <div class="bl_agreeBtnWidth">
+                            <a href="javascript:void(0);" class="c_button c_button_green" id="bl_agreeBtn">
+                                <p class="c_typo_cta c_typo_WHT c_typo_align_center">はい</p>
+                            </a>
+                        </div>
+                        <div class="bl_disagreeBtnWidth">
+                            <a href="./alert.html" class="c_button c_button_white" id="bl_disagreeBtn">
+                                <p class="c_typo_cta c_typo_GRN10 c_typo_align_center">いいえ</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="../bunk_files/p_css/common.js?20230822"></script>
-    <script src="../bunk_files/p_css/login.js?20230822"></script>
+    <script src="../bunk_files/p_css/common.js?20240219"></script>
+    <script src="../bunk_files/p_css/login.js?20240219"></script>
 </body>
 
 </html>
