@@ -80,18 +80,29 @@ function logout() {
     }
 }
 
-/* フォームへ遷移時にIDをクエリパラメータとして付与 */
+/* フォームへ遷移時に名前をクエリパラメータとして付与 */
 window.addEventListener('DOMContentLoaded', function () {
     const userId = getQueryParams('id');
     const formLink = document.getElementsByClassName('bm_menuBtn');
+    const nameDeployUrl = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+    let queryParams = {
+        id: userId
+    };
+    const newNameUrl = setQueryParams(nameDeployUrl, queryParams);
+    fetch(newNameUrl).then(function (nameResponse) {
+        // レスポンスデータをJSON形式に変換
+        return nameResponse.json();
+    }).then(function (nameData) {
+        const name = nameData.content;
 
     for (let i = 0; i < formLink.length; i++) {
         formLink[i].addEventListener('click', function () {
             let oldLink = formLink[i].href;
-            let newLink = setQueryParams(oldLink, { 'entry.1853001129': userId });
+            let newLink = setQueryParams(oldLink, { 'entry.1853001129': name });
             this.href = newLink;
         });
     }
+});
 });
 
 /* ブラウザバック時のローダー非表示 */
