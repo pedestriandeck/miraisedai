@@ -80,7 +80,7 @@ function logout() {
     }
 }
 
-/* フォームへ遷移時に名前をクエリパラメータとして付与 */
+/* フォームへ遷移時にid,名前をクエリパラメータとして付与 */
 window.addEventListener('DOMContentLoaded', function () {
     const userId = getQueryParams('id');
     const formLink = document.getElementsByClassName('bm_menuBtn');
@@ -98,7 +98,7 @@ window.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < formLink.length; i++) {
         formLink[i].addEventListener('click', function () {
             let oldLink = formLink[i].href;
-            let newLink = setQueryParams(oldLink, { 'entry.1853001129': name });
+            let newLink = setQueryParams(oldLink, { 'entry.1853001129': userId, 'entry.1735655626': name });
             this.href = newLink;
         });
     }
