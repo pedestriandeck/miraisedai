@@ -1,6 +1,8 @@
 /** ログイン画面 **/
 // ID一覧スプレッドシートのウェブアプリURLを定義
-const WEBAPPURL = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+const IDLISTURL = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+// ログイン情報スプレッドシートのウェブアプリURLを定義
+const LOGURL = 'https://script.google.com/macros/s/AKfycbyc2dGW3Rjf51nWKMqmo4cO1jX9HaspnWsZXfU8YVKJh5LsuLrxN_-uX7wKDsIAef9Hfg/exec';
 
 window.addEventListener('DOMContentLoaded', function () {
     // 要素を取得
@@ -31,6 +33,15 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    userId.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            if (this.value.length == 5) {
+                this.blur();
+                loginBtn.click();
+            }
+        }
+    });
+
     // 「ログイン」ボタン押下時の処理
     loginBtn.addEventListener('click', function () {
         // 「ID」テキストフィールドの入力値を取得
@@ -41,7 +52,7 @@ window.addEventListener('DOMContentLoaded', function () {
             showLoader();
 
             // クエリパラメータをURLに追加
-            const getNameUrl = setQueryParams(WEBAPPURL, { id: userIdValue });
+            const getNameUrl = setQueryParams(IDLISTURL, { id: userIdValue });
 
             // GASへGET送信
             fetch(getNameUrl).then(function (response) {
@@ -79,6 +90,9 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // 「はい」ボタン押下時の処理
     agreeBtn.addEventListener('click', function () {
+        // ローダーを表示
+        showLoader();
+
         // テキストフィールドの値（入力されたID）を取得
         const userIdValue = userId.value;
 
@@ -95,7 +109,7 @@ window.addEventListener('DOMContentLoaded', function () {
         };
 
         // GASのウェブアプリURLにPOSTリクエストを送信
-        fetch(WEBAPPURL, postparam).then(function (response) {
+        fetch(LOGURL, postparam).then(function (response) {
             if (response.ok) {
                 // レスポンスが返ってきた場合
                 // レスポンスデータをJSON形式に変換
