@@ -1,4 +1,4 @@
-/** ログイン **/
+/** ログイン画面 **/
 body {
     background-color: #FEF2CC;
 }
@@ -56,43 +56,8 @@ body {
     box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.8);
 }
 
-.bl_typo_titleTop {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 28px;
-    text-align: center;
-}
-
-.bl_typo_PNK01 {
-    color: #B9477E;
-}
-
-.bl_typo_PPL01 {
-    color: #67498D;
-}
-
-.bl_typo_BLU01 {
-    color: #5EA1C5;
-}
-
-.bl_typo_GRN01 {
-    color: #72AD66;
-}
-
-.bl_typo_YEL01 {
-    color: #CA853B;
-}
-
 .bl_titleSpace {
     padding-top: 4px;
-}
-
-.bl_typo_titleBottom {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 36px;
-    color: #2E2E2E;
-    text-align: center;
 }
 
 /* 表示/非表示切り替え */

@@ -1,4 +1,4 @@
-/** ログイン **/
+/** ログイン画面 **/
 // ID一覧スプレッドシートのウェブアプリURLを定義
 const WEBAPPURL = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
 
@@ -8,10 +8,19 @@ window.addEventListener('DOMContentLoaded', function () {
     const agreeBtn = document.getElementById('bl_agreeBtn'); // 「はい」ボタン
     const userId = document.getElementById('bl_userId'); // 「ID」テキストフィールド
     const loginErrorArea = document.getElementsByClassName('bl_loginErrorArea')[0]; // ノーティフィケーションエリア
-    const errorMessage = document.getElementsByClassName('c_notification_typo_text')[0]; // エラーメッセージ
+    const errorMessage = loginErrorArea.getElementsByClassName('c_notification_text')[0].firstElementChild // エラーメッセージ
     const nickname = document.getElementById('bl_nickname');
     const inputArea = document.getElementById('bl_inputMode');
     const confirmArea = document.getElementById('bl_confirmMode');
+
+    // ローダーの生成
+    createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
+
+    // 画面読込完了時の処理
+    window.addEventListener('load', function () {
+        // ローダーを非表示
+        hideLoader();
+    });
 
     // 「ID」テキストフィールド入力時の処理
     userId.addEventListener('input', function () {

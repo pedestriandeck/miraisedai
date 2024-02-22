@@ -9,26 +9,12 @@
     <!-- 共通CSS -->
     <link rel="stylesheet" href="../bunk_files/p_css/reset.css?20240219">
     <link rel="stylesheet" href="../bunk_files/p_css/common.css?20240219">
+    <link rel="stylesheet" href="../bunk_files/p_css/components.css?20240219">
     <!-- 画面個別CSS -->
     <link rel="stylesheet" href="../bunk_files/p_css/login.css?20240219">
 </head>
 
 <body>
-    <!-- ローダー -->
-    <div class="c_loader c_loader_hidden">
-        <div class="c_loader_center">
-            <div class="c_loader_wrapper">
-                <div class="c_loader_circle"></div>
-                <div class="c_loader_circle"></div>
-                <div class="c_loader_circle"></div>
-                <div class="c_loader_shadow"></div>
-                <div class="c_loader_shadow"></div>
-                <div class="c_loader_shadow"></div>
-                <p class="c_typo_loaderTitle">よみこみ<ruby>中<rt>ちゅう</rt></ruby></p>
-            </div>
-        </div>
-    </div>
-
     <!-- メイン -->
     <main>
         <!-- 画像エリア -->
@@ -39,12 +25,13 @@
                 </div>
                 <div class="bl_cityImage">
                     <div class="bl_titleBox">
-                        <p class="bl_typo_titleTop"><span class="bl_typo_PNK01">あ</span><span
-                                class="bl_typo_PPL01">そ</span><span class="bl_typo_BLU01">び</span><span
-                                class="bl_typo_GRN01"><ruby>大<rt>だい</rt></ruby></span><span
-                                class="bl_typo_YEL01"><ruby>学<rt>がく</rt></ruby></span></p>
+                        <p class="c_typo_headerL c_typo_align_center"><span class="c_typo_PNK01">あ</span><span
+                                class="c_typo_PPL01">そ</span><span class="c_typo_BLU01">び</span><span
+                                class="c_typo_GRN01"><ruby>大<rt>だい</rt></ruby></span><span class="c_typo_YEL01"><ruby>学
+                                    <rt>がく</rt></ruby></span></p>
                         <div class="bl_titleSpace">
-                            <p class="bl_typo_titleBottom">こども<ruby>銀行<rt>ぎんこう</rt></ruby></p>
+                            <p class="c_typo_headerXXL c_typo_BLK10 c_typo_align_center">こども<ruby>銀行<rt>ぎんこう</rt></ruby>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -54,13 +41,13 @@
         <!-- ログインフォームエリア -->
         <section class="bl_loginFormArea">
             <div class="bl_container">
-                <p class="bl_typo_formTitle">ログイン</p>
+                <p class="c_typo_headerL c_typo_BLK10 c_typo_align_center">ログイン</p>
                 <div id="bl_inputMode">
                     <div class="bl_textFieldArea">
                         <div class="c_textField">
                             <div class="c_textField_labelArea">
-                                <p class="c_textField_typo_label">ID</p>
-                                <p class="c_textField_typo_asterisk">&#42;</p>
+                                <p class="c_typo_headerS c_typo_BLK10">ID</p>
+                                <p class="c_typo_headerS c_typo_ERROR">&#42;</p>
                             </div>
                             <div class="c_textField_inputArea">
                                 <input inputmode="numeric" maxlength="5" placeholder="にゅうりょくしてください"
@@ -86,7 +73,7 @@
                                 </g>
                             </svg>
                             <div class="c_notification_text">
-                                <p class="c_notification_typo_text"></p>
+                                <p class="c_typo_headerS c_typo_BLK10"></p>
                             </div>
                             <div class="c_notification_closeBtn"><svg version="1.1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
@@ -129,6 +116,7 @@
         </section>
     </main>
 
+    <script src="../bunk_files/p_css/event.js?20240219"></script>
     <script src="../bunk_files/p_css/common.js?20240219"></script>
     <script src="../bunk_files/p_css/login.js?20240219"></script>
 </body>
