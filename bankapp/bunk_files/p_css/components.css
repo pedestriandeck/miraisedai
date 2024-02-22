@@ -648,35 +648,14 @@
     padding-left: 8px;
 }
 
-.c_notification02_typo_title {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    color: #2E2E2E;
-}
-
 .c_notification02_contentArea {
     padding: 8px 12px 0 12px;
-}
-
-.c_notification02_typo_content {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    color: #2E2E2E;
 }
 
 .c_notification02_textLink {
     display: flex;
     align-items: center;
     padding-left: 4px;
-}
-
-.c_notification02_typo_textLink {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    color: #008673;
 }
 
 .c_notification02_typo_textLink:visited {
