@@ -1,0 +1,48 @@
+/* メイン */
+/* 残高表示エリア */
+.bh_userCardArea {
+    padding: 32px 20px;
+}
+
+.bh_userCard {
+    position: relative;
+    padding: 16px;
+    border: 3px solid #D5D5D5;
+    border-radius: 16px;
+}
+
+.bh_typo_name {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.bh_amountArea {
+    padding-top: 16px;
+    padding-right: 80px;
+}
+
+.bh_typo_amount {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-align: right;
+}
+
+#bh_amuntKids {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+}
+
+.bh_imageArea {
+    position: absolute;
+    top: 8px;  
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+
+}
