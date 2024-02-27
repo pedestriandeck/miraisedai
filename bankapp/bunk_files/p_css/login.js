@@ -1,122 +1,140 @@
-/** ログイン **/
-/* ログインボタン押下時の処理 */
-function clickLoginBtn() {
-    const loginBtn = this;
-    const textField = document.getElementById('bl_textField');
-    const inputId = textField.value;
+/** ログイン画面 **/
+// ID一覧スプレッドシートのウェブアプリURLを定義
+const IDLISTURL = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+// ログイン情報スプレッドシートのウェブアプリURLを定義
+const LOGURL = 'https://script.google.com/macros/s/AKfycbyc2dGW3Rjf51nWKMqmo4cO1jX9HaspnWsZXfU8YVKJh5LsuLrxN_-uX7wKDsIAef9Hfg/exec';
 
-    // ログインボタンを非活性化
-    loginBtn.classList.add('bl_clickedLoginBtn');
-    // ノーティフィケーションエリアの要素を取得
-    const loginErrorArea = document.getElementsByClassName('bl_loginErrorArea')[0];
-    // エラーメッセージの要素を取得
-    const errorMessage = document.getElementsByClassName('c_notification_typo_text')[0];
+window.addEventListener('DOMContentLoaded', function () {
+    // 要素を取得
+    const loginBtn = document.getElementById('bl_loginBtn'); // 「ログイン」ボタン
+    const agreeBtn = document.getElementById('bl_agreeBtn'); // 「はい」ボタン
+    const userId = document.getElementById('bl_userId'); // 「ID」テキストフィールド
+    const loginErrorArea = document.getElementsByClassName('bl_loginErrorArea')[0]; // ノーティフィケーションエリア
+    const errorMessage = loginErrorArea.getElementsByClassName('c_notification_text')[0].firstElementChild // エラーメッセージ
+    const nickname = document.getElementById('bl_nickname');
+    const inputArea = document.getElementById('bl_inputMode');
+    const confirmArea = document.getElementById('bl_confirmMode');
 
-    if (inputId != '') {
-        // ローダーの表示
-        showLoader();
+    // ローダーの生成
+    createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
 
-        const deployUrl = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+    // 画面読込完了時の処理
+    window.addEventListener('load', function () {
+        // ローダーを非表示
+        hideLoader();
+    });
 
-        // クエリパラメータをURLに追加
-        let getNameUrl = setQueryParams(deployUrl, { id: inputId });
+    // 「ID」テキストフィールド入力時の処理
+    userId.addEventListener('input', function () {
+        if (this.value.length == 5) {
+            // 5桁入力した場合
+            // ログインボタンにフォーカス
+            loginBtn.focus();
+        }
+    });
 
-        fetch(getNameUrl).then(function (response) {
-            if (response.ok) {
-                // レスポンスデータをJSON形式に変換
-                return response.json();
-            } else {
-                // ローダーの非表示
-                hideLoader();
-                // ログインボタンの活性化
-                loginBtn.classList.remove('bl_clickedLoginBtn');
+    userId.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            if (this.value.length == 5) {
+                this.blur();
+                loginBtn.click();
+            }
+        }
+    });
+
+    // 「ログイン」ボタン押下時の処理
+    loginBtn.addEventListener('click', function () {
+        // 「ID」テキストフィールドの入力値を取得
+        const userIdValue = userId.value;
+
+        if (userIdValue != '') {
+            // ローダーを表示
+            showLoader();
+
+            // クエリパラメータをURLに追加
+            const getNameUrl = setQueryParams(IDLISTURL, { id: userIdValue });
+
+            // GASへGET送信
+            fetch(getNameUrl).then(function (response) {
+                if (response.ok) {
+                    // レスポンスが返ってきた場合
+                    // レスポンスデータをJSON形式に変換
+                    return response.json();
+                }
+            }).then(function (data) {
+                if (data.content !== undefined) {
+                    // レスポンスが返ってきた場合
+                    // ニックネームを表示
+                    nickname.innerText = data.name;
+                    // 入力⇔確認画面表示切り替え
+                    inputArea.classList.add('bl_hidden');
+                    confirmArea.classList.remove('bl_hidden');
+                }
+            }).catch(function (error) {
+                // レスポンスが返ってこなかった場合
                 // ノーティフィケーションを表示
                 loginErrorArea.classList.add('bl_showLoginError');
                 // エラーメッセージの文言を入力
-                errorMessage.innerHTML = `ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください`;
-            }
-        }).then(function (data) {
-            if (data.content == '') {
-                // ローダーの非表示
+                errorMessage.innerHTML = 'ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください<br>' + error;
+            }).then(function () {
+                // ローダーを非表示
                 hideLoader();
-                // ログインボタンの活性化
-                loginBtn.classList.remove('bl_clickedLoginBtn');
-                // ノーティフィケーションを表示
-                loginErrorArea.classList.add('bl_showLoginError');
-                // エラーメッセージの文言を入力
-                errorMessage.innerHTML = `にゅうりょくされたIDがありません。<br>ただしいIDをにゅうりょくしてください`;
-            } else {
-                const nickname = document.getElementById('bl_nickname');
-                const inputArea = document.getElementById('bl_inputMode');
-                const confirmArea = document.getElementById('bl_confirmMode');
-
-                // ニックネームを表示
-                nickname.innerText = data.content;
-                // 入力⇔確認画面表示切り替え
-                inputArea.classList.add('bl_hidden');
-                confirmArea.classList.remove('bl_hidden');
-            }
-            // ログインボタンの活性化
-            loginBtn.classList.remove('bl_clickedLoginBtn');
-            // ローダーの非表示
-            hideLoader();
-        }).catch(function (error) {
-            // ローダーの非表示
-            hideLoader();
-            // ログインボタンの活性化
-            loginBtn.classList.remove('bl_clickedLoginBtn');
+            });
+        } else {
             // ノーティフィケーションを表示
             loginErrorArea.classList.add('bl_showLoginError');
             // エラーメッセージの文言を入力
-            errorMessage.innerHTML = `ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください`;
+            errorMessage.innerText = 'IDをにゅうりょくしてください';
+        }
+    });
+
+    // 「はい」ボタン押下時の処理
+    agreeBtn.addEventListener('click', function () {
+        // ローダーを表示
+        showLoader();
+
+        // テキストフィールドの値（入力されたID）を取得
+        const userIdValue = userId.value;
+
+        // 送信データを定義
+        let sendData = {
+            "userId": userIdValue
+        };
+
+        // 送信パラメータを定義
+        const postparam = {
+            "method": "POST",
+            "Content-Type": "application/json",
+            "body": JSON.stringify(sendData)
+        };
+
+        // GASのウェブアプリURLにPOSTリクエストを送信
+        fetch(LOGURL, postparam).then(function (response) {
+            if (response.ok) {
+                // レスポンスが返ってきた場合
+                // レスポンスデータをJSON形式に変換
+                return response.json();
+            }
+        }).then(function (data) {
+            if (data.status !== undefined) {
+                // レスポンスが返ってきた場合
+                // URLにクエリパラメータを付与して遷移
+                location.href = setQueryParams('./menu.html', { id: userIdValue });
+            }
+        }).catch(function (error) {
+            // レスポンスが返ってこなかった場合
+            // ノーティフィケーションを表示
+            loginErrorArea.classList.add('bl_showLoginError');
+            // エラーメッセージの文言を入力
+            errorMessage.innerHTML = 'ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください<br>' + error;
         });
-    } else {
-        // ローダーの非表示
-        hideLoader();
-        // ノーティフィケーションを表示
-        loginErrorArea.classList.add('bl_showLoginError');
-        // エラーメッセージの文言を入力
-        errorMessage.innerText = 'IDをにゅうりょくしてください';
-        // ログインボタンの活性化
-        loginBtn.classList.remove('bl_clickedLoginBtn');
-    }
-}
+    });
+});
 
-const loginBtn = document.getElementById('bl_loginBtn');
-
-loginBtn.addEventListener('click', clickLoginBtn);
-
-/* 「はい」ボタン押下時の処理 */
-function clickAgreeBtn() {
-    // ローダーの表示
-    showLoader();
-    // フォーム内のテキストフィールド要素を取得
-    const textField = document.getElementById('bl_textField');
-    // テキストフィールドの値（入力されたID）を取得
-    const inputId = textField.value;
-    // URLにクエリパラメータを付与して遷移
-    location.href = setQueryParams('./menu.html', { id: inputId });
-}
-
-const agreeBtn = document.getElementById('bl_agreeBtn');
-
-agreeBtn.addEventListener('click', clickAgreeBtn);
-
-// ユーザーが"Disagree"ボタンをクリックした際に呼ばれる関数
-function clickDisagreeBtn() {
-    // ローダーの表示
-    showLoader();
-    // 警告画面へ遷移
-    location.href = './alert.html';
-}
-
-const disagreeBtn = document.getElementById('bl_disagreeBtn');
-
-disagreeBtn.addEventListener('click', clickDisagreeBtn);
-
-/* ブラウザバック時のローダー非表示 */
+// ブラウザバック時の処理
 window.addEventListener('pageshow', function (e) {
     if (e.persisted) {
+        // ローダーを非表示
         hideLoader();
     }
 });

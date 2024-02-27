@@ -1,6 +1,5 @@
-/** ログイン **/
-/* メイン */
-main {
+/** ログイン画面 **/
+body {
     background-color: #FEF2CC;
 }
 
@@ -57,43 +56,8 @@ main {
     box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.8);
 }
 
-.bl_typo_titleTop {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 28px;
-    text-align: center;
-}
-
-.bl_typo_PNK01 {
-    color: #B9477E;
-}
-
-.bl_typo_PPL01 {
-    color: #67498D;
-}
-
-.bl_typo_BLU01 {
-    color: #5EA1C5;
-}
-
-.bl_typo_GRN01 {
-    color: #72AD66;
-}
-
-.bl_typo_YEL01 {
-    color: #CA853B;
-}
-
 .bl_titleSpace {
     padding-top: 4px;
-}
-
-.bl_typo_titleBottom {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 36px;
-    color: #2E2E2E;
-    text-align: center;
 }
 
 /* 表示/非表示切り替え */
@@ -103,7 +67,7 @@ main {
 
 /* ログインフォームエリア */
 .bl_loginFormArea {
-    padding: 24px 20px 32px;
+    padding: 24px 20px 0;
 }
 
 .bl_typo_formTitle {
@@ -115,12 +79,12 @@ main {
 }
 
 .bl_textFieldArea {
-    padding-top: 16px;
+    padding-top: 24px;
 }
 
 .bl_loginErrorArea {
     display: none;
-    padding-top: 24px;
+    padding-top: 8px;
 }
 
 .bl_showLoginError {
@@ -128,23 +92,13 @@ main {
 }
 
 .bl_loginBtnArea {
-    padding-top: 24px;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
 }
 
-.bl_loginBtn {
-    display: block;
+.bl_loginBtnWidth {
     width: 280px;
-    margin: 0 auto;
-    padding: 16px 24px;
-    border-radius: 24px;
-    background-color: #008673;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-.bl_clickedLoginBtn {
-    background-color: #585858;
-    box-shadow: none;
-    transform: translateY(4px);
 }
 
 .bl_typo_loginBtn {
@@ -157,7 +111,7 @@ main {
 
 @media (min-width: 760px) {
     .bl_loginFormArea {
-        padding: 32px 0 48px;
+        padding: 32px 0 0;
     }
 
     .bl_loginFormArea>.bl_container {
@@ -172,14 +126,7 @@ main {
 
 /* 選択エリア */
 .bl_confirmArea {
-    padding-top: 16px;
-}
-
-.bl_typo_confirm {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 26px;
-    color: #2E2E2E;
+    padding-top: 24px;
 }
 
 .bl_highlight {
@@ -189,52 +136,13 @@ main {
 .bl_confirmBtnArea {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding-top: 24px;
+    padding: 40px 0;
 }
 
-.bl_confirmBtnArea>li {
-    flex-grow: 1;
-    width: 50%;
+.bl_confirmBtnArea>div:last-child {
+    margin-left: 16px;
 }
 
-.bl_confirmBtnArea>li:first-child {
-    padding-right: 16px;
-}
-
-.bl_confirmBtnArea>li:last-child {
-    padding-left: 16px;
-}
-
-.bl_agreeBtn {
-    width: 100%;
-    padding: 16px 24px;
-    border-radius: 24px;
-    background-color: #008673;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-.bl_typo_agreeBtn {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.bl_disagreeBtn {
-    width: 100%;
-    padding: 15px 24px;
-    border: 1px solid #008673;
-    border-radius: 24px;
-    background-color: #FFFFFF;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
-}
-
-.bl_typo_disagreeBtn {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 24px;
-    color: #008673;
-    text-align: center;
+.bl_agreeBtnWidth, .bl_disagreeBtnWidth {
+    flex-basis: 100%;
 }

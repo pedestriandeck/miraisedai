@@ -41,26 +41,32 @@ window.addEventListener('DOMContentLoaded', function () {
         showLoader();
 
         // スプレッドシートのウェブアプリURLを定義
-        const appUrl = 'https://script.google.com/macros/s/AKfycbzzp0P-lsjnNPbdJTZL3V58TTUAuWov3cRK_Qc0rJgjZY9tYRvTNthoKaptnI7C_AFypQ/exec';
-        const hash = getHash(256);
+        const WEBAPPURL = 'https://script.google.com/macros/s/AKfycbzzp0P-lsjnNPbdJTZL3V58TTUAuWov3cRK_Qc0rJgjZY9tYRvTNthoKaptnI7C_AFypQ/exec';
 
         // 送信データを定義
-        let SendDATA = {
-            "name": name.value,
-            "hash": hash
+        let sendData = {
+            "name": name.value
         };
 
         // 送信パラメータを定義
         const postparam = {
             "method": "POST",
-            "mode": "no-cors",
             "Content-Type": "application/json",
-            "body": JSON.stringify(SendDATA)
+            "body": JSON.stringify(sendData)
         };
 
         // 指定されたURLにリクエストを送信
-        fetch(appUrl, postparam).then(function () {
-            location.href = setQueryParams('./accountConfirm.html', { "transmission": hash });
+        fetch(WEBAPPURL, postparam).then(function (response) {
+            // GASからのレスポンスをJSON型に変換
+            return response.json();
+        }).then(function (data) {
+            if (data.newId !== undefined) {
+                // レスポンスがちゃんと返ってきた場合
+                location.href = setQueryParams('./accountConfirm.html', { "id": data.newId });
+            } else {
+                // レスポンスが返ってこなかった場合
+                console.log('レスポンス返ってこない、、、');
+            }
         }).catch(function (error) {
             console.log(error);
             window.alert(error);

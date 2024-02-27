@@ -1,4 +1,4 @@
-/** メニュー選択 **/
+/** メニュー選択画面 **/
 function formatNumberWithCommas(number) {
     // 数値を文字列に変換し、逆順にして桁区切りを追加する
     const strNumber = number.toString();
@@ -27,8 +27,8 @@ function changeFace(amount) {
 
 /* DBから値を取得して表示 */
 window.addEventListener('DOMContentLoaded', function () {
-    // ローダーの表示
-    showLoader();
+    // ローダーの生成
+    createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
 
     // IDの認証
     const userId = getQueryParams('id');
@@ -68,17 +68,15 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-
 /* ログアウト */
-const logoutLink = document.getElementById('bm_logoutLink');
-logoutLink.addEventListener('click', logout);
-function logout() {
+const logoutLink = document.getElementById('com_logoutLink');
+
+logoutLink.addEventListener('click', function () {
     let result = window.confirm('ほんとうにログアウトしますか？\n※ログインがめんにもどります');
     if (result) {
         this.href = './login.html';
     }
-}
+});
 
 /* フォームへ遷移時にIDをクエリパラメータとして付与 */
 window.addEventListener('DOMContentLoaded', function () {

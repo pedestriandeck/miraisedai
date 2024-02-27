@@ -1,6 +1,6 @@
-/** 警告 **/
-/* メイン */
-main {
+/** 警告画面 **/
+/* ボディ */
+body {
     background-color: #CCE2F2;
 }
 
@@ -80,46 +80,11 @@ main {
     box-shadow: 0 0 4px 4px rgba(255, 255, 255, 0.8);
 }
 
-.ba_typo_titleTop {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 28px;
-    text-align: center;
-}
-
-.ba_typo_PNK01 {
-    color: #B9477E;
-}
-
-.ba_typo_PPL01 {
-    color: #67498D;
-}
-
-.ba_typo_BLU01 {
-    color: #5EA1C5;
-}
-
-.ba_typo_GRN01 {
-    color: #72AD66;
-}
-
-.ba_typo_YEL01 {
-    color: #CA853B;
-}
-
 .ba_titleSpace {
     padding-top: 4px;
 }
 
-.ba_typo_titleBottom {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 36px;
-    color: #2E2E2E;
-    text-align: center;
-}
-
 /* 警告エリア */
 .ba_alertArea {
-    padding: 24px 20px 32px;
+    padding: 24px 20px 0;
 }
