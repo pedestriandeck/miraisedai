@@ -8,40 +8,20 @@ body {
     padding: 32px 0 0;
 }
 
-.bai_typo_ttl {
-    font-size: 24px;
-    line-height: 32px;
-    font-weight: 700;
-    text-align: center;
-}
-
 .bai_lead {
     padding: 24px 20px 0;
 }
 
-.bai_typo_lead {
-    font-size: 18px;
-    line-height: 26px;
-    font-weight: 400;
-}
-
 @media (min-width: 760px) {
     .bai_ttlSec {
+        width: 100%;
+        max-width: 592px;
+        margin: 0 auto;
         padding: 64px 0 0;
     }
 
-    .bai_typo_ttl {
-        font-size: 42px;
-        line-height: 50px;
-    }
-
     .bai_lead {
-        padding: 48px 32px 0;
-    }
-
-    .bai_typo_lead {
-        font-size: 24px;
-        line-height: 36px;
+        padding: 48px 0 0;
     }
 }
 
@@ -112,14 +92,6 @@ body {
     transition: cubic-bezier(0, 0.2, 0.4, 1) 200ms;
 }
 
-.bai_typo_confirmBtn {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 16px;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.bai_confirmBtn_disabled .bai_typo_confirmBtn {
+.bai_confirmBtn_disabled p {
     color: #939393;
 }
