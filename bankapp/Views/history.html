@@ -8,7 +8,8 @@
     <title>あそび大学こども銀行 | とりひきのりれき</title>
     <!-- 共通CSS -->
     <link rel="stylesheet" href="../bunk_files/p_css/reset.css?20230822">
-    <link rel="stylesheet" href="../bunk_files/p_css/common.css?20230822">
+    <link rel="stylesheet" href="../bunk_files/p_css/components.css">
+    <link rel="stylesheet" href="../bunk_files/p_css/common.css">
     <!-- 画面個別CSS -->
     <link rel="stylesheet" href="../bunk_files/p_css/history.css?20230822">
 </head>
@@ -31,8 +32,8 @@
 
     <!-- ヘッダー -->
     <header>
-        <div class="c_headerContent">
-            <p class="c_typo_header"><span class="c_typo_PNK01">あ</span><span class="c_typo_PPL01">そ</span><span
+        <div class="com_headerContent">
+            <p class="com_typo_header"><span class="c_typo_PNK01">あ</span><span class="c_typo_PPL01">そ</span><span
                     class="c_typo_BLU01">び</span><span class="c_typo_GRN01"><ruby>大<rt>だい</rt></ruby></span><span
                     class="c_typo_YEL01"><ruby>学<rt>がく</rt></ruby></span>　こども<ruby>銀行<rt>ぎんこう</rt></ruby></p>
             <a id="c_logoutLink">
@@ -76,17 +77,39 @@
             <div class="bh_userCardArea">
                 <div class="bh_userCard">
                     <div class="bh_nameArea">
-                        <div class="bh_typo_name">
+                        <p class="bh_typo_name">
                             <span id="bh_userName">おなまえ</span>　さま
-                        </div>
+                        </p>
                     </div>
                     <div class="bh_amountArea">
-                        <div class="bh_typo_amount">
+                        <p class="bh_typo_amount">
                             <span id="bh_amuntKids">0</span>　キッズ
-                        </div>
+                        </p>
                     </div>
                     <div class="bh_imageArea">
                         <img src="../bunk_files/p_image/bh_penguin_surfing.svg" alt="bh_penguin_surfing" width="100%">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- グラフ表示エリア -->
+        <section class="bh_historyGraphSec">
+            <div class="bh_historyGraphArea">
+                <div class="bh_historyAreaTitle">
+                    <p class="bh_typo_historyTitle">とりひきのりれき</p>
+                </div>
+                <div class="bh_graphArea">
+                    <div class="box">
+                        <img src="../bunk_files/p_image/penguin.png" alt="penguin" width="100%">
+                    </div>
+                    <div class="graph">
+                        <div class="canvasArea">
+                            <canvas class="canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="image">
+                        <img src="../bunk_files/p_image/antarctic.svg" alt="antarctic">
                     </div>
                 </div>
             </div>
@@ -98,6 +121,7 @@
 
 </body>
 
+<script src="../bunk_files/p_css/event.js?20230822"></script>
 <script src="../bunk_files/p_css/common.js?20230822"></script>
 <script src="../bunk_files/p_css/history.js?20230822"></script>
 </body>

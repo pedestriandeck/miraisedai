@@ -1,7 +1,7 @@
 /* メイン */
 /* 残高表示エリア */
 .bh_userCardArea {
-    padding: 32px 20px;
+    padding: 32px 20px 0;
 }
 
 .bh_userCard {
@@ -30,14 +30,14 @@
 }
 
 #bh_amuntKids {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 28px;
+    line-height: 40px;
     font-weight: 700;
 }
 
 .bh_imageArea {
     position: absolute;
-    top: 8px;  
+    top: 8px;
     right: 8px;
     display: flex;
     justify-content: center;
@@ -45,4 +45,119 @@
     width: 80px;
     height: 80px;
 
+}
+
+/* グラフ表示エリア */
+.bh_historyGraphArea {
+    padding: 32px 20px 0;
+}
+
+.bh_typo_historyTitle {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #0F92C4;
+}
+
+.bh_graphArea {
+    position: relative;
+    padding-top: 16px;
+}
+
+/* グラフ */
+.box {
+    /* background-color: #87a5f8; */
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/* キャンバスエリア */
+.graph {
+    width: 100%;
+    aspect-ratio: 7 / 3;
+    position: relative;
+}
+
+/* キャンバスエリア */
+.canvasArea {
+    height: 100%;
+    padding: 8px 0 24px 36px;
+}
+
+.canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* X軸ラベルエリア */
+.graph_XlabelArea {
+    width: 100%;
+    display: flex;
+    padding-left: 24px;
+}
+
+.graph_goodText {
+    padding-right: 8px;
+    flex-shrink: 0;
+}
+
+.graph_goodText>p {
+    margin: 0;
+}
+
+.graph_Xlabel {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.graph_Xlabel>div {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.graph_badText {
+    padding-left: 8px;
+    flex-shrink: 0;
+}
+
+.graph_badText>p {
+    margin: 0;
+}
+
+/* Y軸ラベル */
+.graph_YlabelArea {
+    height: 100%;
+    width: 100%;
+    padding: 8px 8px 24px 0;
+    position: absolute;
+    top: 0;
+    left: 8px;
+}
+
+.graph_Ylabel {
+    height: 50px;
+}
+
+.yLabel {
+    margin: 0;
+    transform: translateY(-50%);
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.image>img {
+    position: absolute;
+    top: 0;
+    left: 36px;
+    z-index: -1;
+    opacity: 0.18;
 }
