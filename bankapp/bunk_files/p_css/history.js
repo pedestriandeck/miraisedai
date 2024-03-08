@@ -5,7 +5,7 @@ const fileData = [{
             // 横軸の色とデータ
             "column": [
                 {
-                    "data": 2,
+                    "data": -200,
                     "color": "#5993EB"
                 },
                 {
@@ -13,61 +13,64 @@ const fileData = [{
                     "color": "#4DABEF"
                 },
                 {
-                    "data": 9,
+                    "data": 9000,
                     "color": "#5ECAEC"
                 },
                 {
-                    "data": 18,
+                    "data": 18000,
                     "color": "#D8DB5F"
                 },
                 {
-                    "data": 22,
+                    "data": 22000,
                     "color": "#F0D800"
                 },
                 {
-                    "data": 40,
+                    "data": 4000,
                     "color": "#FABF00"
                 },
                 {
-                    "data": 30,
+                    "data": 300,
                     "color": "#F69C00"
                 },
                 {
-                    "data": 8,
+                    "data": 80,
                     "color": "#F28300"
                 },
                 {
-                    "data": -10,
+                    "data": -5800,
                     "color": "#F15D78"
                 },
                 {
-                    "data": -3,
+                    "data": 8000,
                     "color": "#E53935"
                 }
             ],
             // 縦軸ラベル
             "row": [
                 {
-                    "label": "-10"
+                    "label": "-5000"
                 },
                 {
                     "label": "0"
                 },
                 {
-                    "label": "10"
+                    "label": "5000"
                 },
                 {
-                    "label": "20"
+                    "label": "10000"
                 },
                 {
-                    "label": "30"
+                    "label": "15000"
+                },
+                {
+                    "label": "20000"
                 }
             ],
             // Y軸の最大最小値（最小は目盛がないところまで設定）と現在値
             "graph": [
                 {
-                    "min": -10,
-                    "max": 30
+                    "min": -5000,
+                    "max": 20000
                 }
             ]
         }
@@ -125,7 +128,7 @@ function createGraph(jsonData, target) {
         }
 
         // 棒グラフの縦軸の座標（Y座標）
-        let Ycoordinate = heightPerOne * (jsonData.graph[0].max - jsonData.column[i].data);
+        let Ycoordinate = heightPerOne * (jsonData.graph[0].max - Math.ceil(jsonData.column[i].data / 100) * 100);
         // データが最大値以上か判定
         if (jsonData.column[i].data > jsonData.graph[0].max - 2) {
             // 上限値に設定
@@ -138,11 +141,19 @@ function createGraph(jsonData, target) {
             // グラフが一番下の横線と重ならないように2px調整
             Ycoordinate = heightPerOne * (jsonData.row[jsonData.row.length - 1].label - jsonData.graph[0].min) - 2;
         }
+        // データが500以上0以上か判定
+        if (jsonData.column[i].data <= 500 && jsonData.column[i].data > 0) {
+            Ycoordinate = heightPerOne * (jsonData.graph[0].max - 500);
+        }
+        // データが-500以上0以下か判定
+        if (jsonData.column[i].data >= -500 && jsonData.column[i].data < 0) {
+            Ycoordinate = heightPerOne * (jsonData.graph[0].max + 500);
+        }
 
         // データが0以外の場合、棒グラフの線を描画する
         if (jsonData.column[i].data != 0) {
             // 2pxで描画するため7px調整、横線に重ならないように調整（1と3の部分）
-            drawTwoCornerRoundedLine(context, XCoordinate[i] + 7, heightPerOne * (jsonData.row[3].label - jsonData.graph[0].min), XCoordinate[i] - 7, Ycoordinate + 1, 2, color, color, 2, false);
+            drawTwoCornerRoundedLine(context, XCoordinate[i] + width / 60, heightPerOne * (jsonData.row[4].label - jsonData.graph[0].min), XCoordinate[i] - width / 60, Ycoordinate + 1, 2, color, color, 2, false);
         }
 
         // ペンギンの位置指定
