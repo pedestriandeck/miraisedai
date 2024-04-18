@@ -65,7 +65,7 @@
 }
 
 /* グラフ */
-.box {
+.bh_box {
     /* background-color: #87a5f8; */
     width: 60px;
     height: 60px;
@@ -76,62 +76,62 @@
 }
 
 /* キャンバスエリア */
-.graph {
+.bh_graph {
     width: 100%;
     aspect-ratio: 7 / 5;
     position: relative;
 }
 
 /* キャンバスエリア */
-.canvasArea {
+.bh_canvasArea {
     height: 100%;
     padding: 8px 0 24px 36px;
 }
 
-.canvas {
+.bh_canvas {
     width: 100%;
     height: 100%;
 }
 
 /* X軸ラベルエリア */
-.graph_XlabelArea {
+.bh_graph_XlabelArea {
     width: 100%;
     display: flex;
     padding-left: 24px;
 }
 
-.graph_goodText {
+.bh_graph_goodText {
     padding-right: 8px;
     flex-shrink: 0;
 }
 
-.graph_goodText>p {
+.bh_graph_goodText>p {
     margin: 0;
 }
 
-.graph_Xlabel {
+.bh_graph_Xlabel {
     display: flex;
     align-items: center;
     width: 100%;
 }
 
-.graph_Xlabel>div {
+.bh_graph_Xlabel>div {
     flex-grow: 1;
     display: flex;
     justify-content: center;
 }
 
-.graph_badText {
+.bh_graph_badText {
     padding-left: 8px;
     flex-shrink: 0;
 }
 
-.graph_badText>p {
+.bh_graph_badText>p {
     margin: 0;
 }
 
 /* Y軸ラベル */
-.graph_YlabelArea {
+.bh_graph_YlabelArea {
     height: 100%;
     width: 100%;
     padding: 8px 8px 24px 0;
@@ -140,11 +140,11 @@
     left: 8px;
 }
 
-.graph_Ylabel {
+.bh_graph_Ylabel {
     height: 50px;
 }
 
-.yLabel {
+.bh_yLabel {
     width: 50px;
     background-color: #FFFFFF;
     border-radius: 4px;
@@ -153,12 +153,12 @@
     text-align: end;
 }
 
-.image {
+.bh_image {
     width: 100%;
     height: 100%;
 }
 
-.image>img {
+.bh_image>img {
     position: absolute;
     margin-top: 20px;
     top: 0;

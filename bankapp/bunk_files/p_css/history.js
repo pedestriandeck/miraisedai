@@ -83,7 +83,7 @@ const fileData = [{
 // ==========================================================================
 function createGraph(jsonData, target) {
     // キャンバス設定
-    const graph_canvas = target.getElementsByClassName('canvas')[0];
+    const graph_canvas = target.getElementsByClassName('bh_canvas')[0];
     const context = graph_canvas.getContext('2d');
     // グラフ領域
     graph_canvas.width = graph_canvas.offsetWidth;
@@ -109,8 +109,8 @@ function createGraph(jsonData, target) {
     }
 
     // 棒グラフを描画する
-    const good = target.getElementsByClassName('graph_goodText')[0].offsetWidth;
-    const bad = target.getElementsByClassName('graph_badText')[0].offsetWidth;
+    const good = target.getElementsByClassName('bh_graph_goodText')[0].offsetWidth;
+    const bad = target.getElementsByClassName('bh_graph_badText')[0].offsetWidth;
     const fluctuationArea = width - good - bad;   // グラフの変動領域
 
     // 各横軸ラベルのX座標を左から順に配列に格納
@@ -157,7 +157,7 @@ function createGraph(jsonData, target) {
         }
 
         // ペンギンの位置指定
-        const box = document.getElementsByClassName('box')[0];
+        const box = document.getElementsByClassName('bh_box')[0];
         if (jsonData.column[i].data >= 0) {
             box.style.top = Ycoordinate * 0.56 + 39 + 'px';
             box.style.left = XCoordinate[i] * 0.93 + 40 + 'px';
@@ -172,7 +172,7 @@ function createGraph(jsonData, target) {
     }
 
     // 背景の幅指定
-    const backGroundImage = document.getElementsByClassName('image')[0];
+    const backGroundImage = document.getElementsByClassName('bh_image')[0];
     backGroundImage.firstElementChild.style.width = graph_canvas.width + 'px';
 }
 
@@ -259,11 +259,11 @@ function createGraph_Element(jsonData, target) {
 
     // X軸ラベルの作成
     const XlabelArea = document.createElement('div');
-    XlabelArea.classList.add('graph_XlabelArea');
+    XlabelArea.classList.add('bh_graph_XlabelArea');
 
     // 「Good」テキスト
     const goodText = document.createElement('div');
-    goodText.classList.add('graph_goodText');
+    goodText.classList.add('bh_graph_goodText');
     // タイポ
     let goodText_typo = document.createElement('p');
     goodText_typo.innerText = 'むかし';
@@ -272,12 +272,12 @@ function createGraph_Element(jsonData, target) {
 
     // X軸ラベル
     const Xlabel = document.createElement('div');
-    Xlabel.classList.add('graph_Xlabel');
+    Xlabel.classList.add('bh_graph_Xlabel');
     for (let i = 0; i < jsonData.column.length; i++) {
         // X軸のbar
         const Xlabel_div = document.createElement('div');
         const Xlabel_bar = document.createElement('div');
-        Xlabel_bar.classList.add('graph_bar');
+        Xlabel_bar.classList.add('bh_graph_bar');
         // Xlabel_bar.style.backgroundColor = jsonData.column[i].color;
 
         Xlabel_div.appendChild(Xlabel_bar);
@@ -287,7 +287,7 @@ function createGraph_Element(jsonData, target) {
 
     // 「Bad」テキスト
     const badText = document.createElement('div');
-    badText.classList.add('graph_badText');
+    badText.classList.add('bh_graph_badText');
     // タイポ
     let badText_typo = document.createElement('p');
     badText_typo.innerText = 'いま';
@@ -297,14 +297,14 @@ function createGraph_Element(jsonData, target) {
 
     // Y軸ラベルの作成
     const YlabelArea = document.createElement('div');
-    YlabelArea.classList.add('graph_YlabelArea');
+    YlabelArea.classList.add('bh_graph_YlabelArea');
     for (let i = jsonData.row.length - 1; i >= 0; i--) {
         const Ylabel = document.createElement('div');
-        Ylabel.classList.add('graph_Ylabel');
+        Ylabel.classList.add('bh_graph_Ylabel');
 
         // タイポ
         let Ylabel_typo = document.createElement('p');
-        Ylabel_typo.className = 'yLabel';
+        Ylabel_typo.className = 'bh_yLabel';
         Ylabel_typo.innerText = jsonData.row[i].label;
 
         Ylabel.appendChild(Ylabel_typo);
@@ -316,24 +316,24 @@ function createGraph_Element(jsonData, target) {
 // y軸ラベルの高さ調整
 function setYlabelHeight(jsondata, height) {
     for (let i = 0; i < jsondata.row.length; i++) {
-        document.getElementsByClassName('graph_Ylabel')[i].style.height = height / (jsondata.row.length - 1) + 'px';
+        document.getElementsByClassName('bh_graph_Ylabel')[i].style.height = height / (jsondata.row.length - 1) + 'px';
     }
 }
 
-const graph = document.getElementsByClassName('graph');
+const graph = document.getElementsByClassName('bh_graph');
 // ページ読み込み時にイベント登録
 window.addEventListener('DOMContentLoaded', function () {
     // グラフ生成処理呼び出し
     for (let i = 0; i < graph.length; i++) {
         createGraph_Element(fileData[0].graphData[i], graph[i]);
         createGraph(fileData[0].graphData[i], graph[i]);
-        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('canvas')[0].offsetHeight);
+        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight);
     }
 });
 // リサイズ時にイベント登録
 window.addEventListener('resize', function () {
     for (let i = 0; i < graph.length; i++) {
         createGraph(fileData[0].graphData[i], graph[i]);
-        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('canvas')[0].offsetHeight);
+        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight);
     }
 });
