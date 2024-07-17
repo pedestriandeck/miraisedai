@@ -41,7 +41,7 @@
 main {
     display: flex;
     flex-direction: column;
-    background:linear-gradient(45deg, #D4E8FE, #F0F0F0);
+    background:linear-gradient(45deg, #FEF2CC, #F0F0F0);
 }
 
 /* 詳細エリア */
