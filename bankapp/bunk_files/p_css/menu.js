@@ -1,4 +1,4 @@
-/** メニュー選択画面 **/
+/** メニュー選択 **/
 function formatNumberWithCommas(number) {
     // 数値を文字列に変換し、逆順にして桁区切りを追加する
     const strNumber = number.toString();
@@ -27,8 +27,8 @@ function changeFace(amount) {
 
 /* DBから値を取得して表示 */
 window.addEventListener('DOMContentLoaded', function () {
-    // ローダーの生成
-    createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
+    // ローダーの表示
+    showLoader();
 
     // IDの認証
     const userId = getQueryParams('id');
@@ -68,28 +68,41 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-/* ログアウト */
-const logoutLink = document.getElementById('com_logoutLink');
 
-logoutLink.addEventListener('click', function () {
+
+/* ログアウト */
+const logoutLink = document.getElementById('bm_logoutLink');
+logoutLink.addEventListener('click', logout);
+function logout() {
     let result = window.confirm('ほんとうにログアウトしますか？\n※ログインがめんにもどります');
     if (result) {
         this.href = './login.html';
     }
-});
+}
 
-/* フォームへ遷移時にIDをクエリパラメータとして付与 */
+/* フォームへ遷移時にid,名前をクエリパラメータとして付与 */
 window.addEventListener('DOMContentLoaded', function () {
     const userId = getQueryParams('id');
     const formLink = document.getElementsByClassName('bm_menuBtn');
+    const nameDeployUrl = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+    let queryParams = {
+        id: userId
+    };
+    const newNameUrl = setQueryParams(nameDeployUrl, queryParams);
+    fetch(newNameUrl).then(function (nameResponse) {
+        // レスポンスデータをJSON形式に変換
+        return nameResponse.json();
+    }).then(function (nameData) {
+        const name = nameData.content;
 
     for (let i = 0; i < formLink.length; i++) {
         formLink[i].addEventListener('click', function () {
             let oldLink = formLink[i].href;
-            let newLink = setQueryParams(oldLink, { 'entry.1853001129': userId });
+            let newLink = setQueryParams(oldLink, { 'entry.1853001129': userId, 'entry.1735655626': name });
             this.href = newLink;
         });
     }
+});
 });
 
 /* ブラウザバック時のローダー非表示 */
