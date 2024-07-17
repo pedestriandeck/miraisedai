@@ -136,7 +136,7 @@ function createGraph(jsonData, target) {
         if (jsonData.column[i].data < jsonData.graph[0].min + 2) {
             // 下限値に設定
             // グラフが一番下の横線と重ならないように2px調整
-            Ycoordinate = 198;
+            Ycoordinate = heightPerOne * (jsonData.row[jsonData.row.length - 1].label - jsonData.graph[0].min) - 2;
         }
 
         // データが0以外の場合、棒グラフの線を描画する
@@ -144,15 +144,20 @@ function createGraph(jsonData, target) {
             // 2pxで描画するため7px調整、横線に重ならないように調整（1と3の部分）
             drawTwoCornerRoundedLine(context, XCoordinate[i] + 7, heightPerOne * (jsonData.row[3].label - jsonData.graph[0].min), XCoordinate[i] - 7, Ycoordinate + 1, 2, color, color, 2, false);
         }
-        console.log(XCoordinate[i] - 7 + 'px', Ycoordinate + 1 + 'px');
+
+        // ペンギンの位置指定
         const box = document.getElementsByClassName('box')[0];
         if (jsonData.column[i].data >= 0) {
-            box.style.top = Ycoordinate + 50 + 'px';
-            box.style.left = XCoordinate[i] + 15 + 'px';
+            box.style.top = Ycoordinate * 0.56 + 103 + 'px';
+            box.style.left = XCoordinate[i] * 0.93 + 40 + 'px';
         } else if (jsonData.column[i].data < 0) {
-            box.style.top = Ycoordinate + 80 + 'px';
-            box.style.left = XCoordinate[i] + 15 + 'px';
+            box.style.top = Ycoordinate + 92 - fluctuationArea / 24 + 'px';
+            box.style.left = XCoordinate[i]  + 30 - fluctuationArea / 24 + 'px';
         }
+
+        // ペンギンの大きさ指定
+        box.style.height = fluctuationArea / 7 + 'px';
+        box.style.width = fluctuationArea / 7 + 'px';
     }
 }
 
@@ -246,7 +251,7 @@ function createGraph_Element(jsonData, target) {
     goodText.classList.add('graph_goodText');
     // タイポ
     let goodText_typo = document.createElement('p');
-    goodText_typo.innerText = 'Good';
+    goodText_typo.innerText = 'むかし';
     goodText.appendChild(goodText_typo);
     XlabelArea.appendChild(goodText);
 
@@ -258,7 +263,7 @@ function createGraph_Element(jsonData, target) {
         const Xlabel_div = document.createElement('div');
         const Xlabel_bar = document.createElement('div');
         Xlabel_bar.classList.add('graph_bar');
-        Xlabel_bar.style.backgroundColor = jsonData.column[i].color;
+        // Xlabel_bar.style.backgroundColor = jsonData.column[i].color;
 
         Xlabel_div.appendChild(Xlabel_bar);
         Xlabel.appendChild(Xlabel_div);
@@ -270,7 +275,7 @@ function createGraph_Element(jsonData, target) {
     badText.classList.add('graph_badText');
     // タイポ
     let badText_typo = document.createElement('p');
-    badText_typo.innerText = 'Bad';
+    badText_typo.innerText = 'いま';
     badText.appendChild(badText_typo);
     XlabelArea.appendChild(badText);
     target.appendChild(XlabelArea);
@@ -293,6 +298,13 @@ function createGraph_Element(jsonData, target) {
     target.appendChild(YlabelArea);
 }
 
+// y軸ラベルの高さ調整
+function setYlabelHeight(jsondata, height) {
+    for (let i = 0; i < jsondata.row.length; i++) {
+        document.getElementsByClassName('graph_Ylabel')[i].style.height = height / (jsondata.row.length - 1) + 'px';
+    }
+}
+
 const graph = document.getElementsByClassName('graph');
 // ページ読み込み時にイベント登録
 window.addEventListener('DOMContentLoaded', function () {
@@ -300,11 +312,13 @@ window.addEventListener('DOMContentLoaded', function () {
     for (let i = 0; i < graph.length; i++) {
         createGraph_Element(fileData[0].graphData[i], graph[i]);
         createGraph(fileData[0].graphData[i], graph[i]);
+        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('canvas')[0].offsetHeight);
     }
 });
 // リサイズ時にイベント登録
 window.addEventListener('resize', function () {
     for (let i = 0; i < graph.length; i++) {
         createGraph(fileData[0].graphData[i], graph[i]);
+        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('canvas')[0].offsetHeight);
     }
 });
