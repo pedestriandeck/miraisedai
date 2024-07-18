@@ -337,3 +337,68 @@ window.addEventListener('resize', function () {
         setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight);
     }
 });
+
+/*** メニュー画面からidと残高を引継ぎなど***/
+function formatNumberWithCommas(number) {
+    // 数値を文字列に変換し、逆順にして桁区切りを追加する
+    const strNumber = number.toString();
+    let formattedNumber = '';
+
+    for (let i = strNumber.length - 1, count = 0; i >= 0; i--, count++) {
+        formattedNumber = strNumber[i] + formattedNumber;
+        if (count !== 0 && count % 3 === 0 && i !== 0) {
+            formattedNumber = ',' + formattedNumber; // 3桁ごとにカンマを追加
+        }
+    }
+
+    return formattedNumber;
+}
+
+/* DBから値を取得して表示 */
+window.addEventListener('DOMContentLoaded', function () {
+    // ローダーの生成
+    createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
+
+    // IDの認証
+    const userId = getQueryParams('id');
+    const nameDeployUrl = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+    let queryParams = {
+        id: userId
+    };
+    const newNameUrl = setQueryParams(nameDeployUrl, queryParams);
+    fetch(newNameUrl).then(function (nameResponse) {
+        // レスポンスデータをJSON形式に変換
+        return nameResponse.json();
+    }).then(function (nameData) {
+        const name = nameData.content;
+        const nameElement = document.getElementById('bh_userName');
+        nameElement.innerText = name;
+    }).then(function () {
+        const amountDeployUrl = 'https://script.google.com/macros/s/AKfycbxWNd3mbrOy7feXkLnWgfrWvGrSXX9jC_yebsJ-0LfYnWeiQfl41s1Fz_0xTim8m3OhnA/exec';
+        const newAmountUrl = setQueryParams(amountDeployUrl, queryParams);
+        fetch(newAmountUrl).then(function (amountResponse) {
+            // レスポンスデータをJSON形式に変換
+            return amountResponse.json();
+        }).then(function (amountData) {
+            const amount = Number(amountData.content);
+            const amoountElement = document.getElementById('bh_amuntKids');
+            amoountElement.innerText = formatNumberWithCommas(amount);
+        }).then(function () {
+            // ローダーの非表示
+            hideLoader();
+        }).catch(function (error) {
+            window.alert('ネットワークにせつぞくされているかかくにんしてください');
+        });
+    }).catch(function (error) {
+        // ローダーの非表示
+        hideLoader();
+        window.alert('ネットワークにせつぞくされているかかくにんしてください');
+    });
+});
+
+/* ブラウザバック時のローダー非表示 */
+window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+        hideLoader();
+    }
+});

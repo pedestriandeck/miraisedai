@@ -36,6 +36,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let queryParams = {
         id: userId
     };
+
     const newNameUrl = setQueryParams(nameDeployUrl, queryParams);
     fetch(newNameUrl).then(function (nameResponse) {
         // レスポンスデータをJSON形式に変換
@@ -78,10 +79,15 @@ logoutLink.addEventListener('click', function () {
     }
 });
 
-/* フォームへ遷移時にIDをクエリパラメータとして付与 */
+/* 残高画面・フォームへ遷移時にIDをクエリパラメータとして付与 */
 window.addEventListener('DOMContentLoaded', function () {
     const userId = getQueryParams('id');
+    const historyLink = document.getElementById('bm_historyBtn');
     const formLink = document.getElementsByClassName('bm_menuBtn');
+
+    historyLink.addEventListener('click', function () {
+        location.href = setQueryParams('./history.html', { id: userId });
+    });
 
     for (let i = 0; i < formLink.length; i++) {
         formLink[i].addEventListener('click', function () {
