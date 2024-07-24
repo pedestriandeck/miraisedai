@@ -63,6 +63,132 @@ const fileData = [{
                     "max": 20000
                 }
             ]
+        },
+        {
+            // 横軸の色とデータ
+            "column": [
+                {
+                    "data": -100
+                },
+                {
+                    "data": 500
+                },
+                {
+                    "data": 900
+                },
+                {
+                    "data": 1800
+                },
+                {
+                    "data": 200
+                },
+                {
+                    "data": 40000
+                },
+                {
+                    "data": 3000
+                },
+                {
+                    "data": -80
+                },
+                {
+                    "data": -500
+                },
+                {
+                    "data": 100
+                }
+            ],
+            // 縦軸ラベル
+            "row": [
+                {
+                    "label": "-5000"
+                },
+                {
+                    "label": "0"
+                },
+                {
+                    "label": "5000"
+                },
+                {
+                    "label": "10000"
+                },
+                {
+                    "label": "15000"
+                },
+                {
+                    "label": "20000"
+                }
+            ],
+            // Y軸の最大最小値（最小は目盛がないところまで設定）と現在値
+            "graph": [
+                {
+                    "min": -5000,
+                    "max": 20000
+                }
+            ]
+        },
+        {
+            // 横軸の色とデータ
+            "column": [
+                {
+                    "data": 1200
+                },
+                {
+                    "data": 6000
+                },
+                {
+                    "data": -9000
+                },
+                {
+                    "data": -8000
+                },
+                {
+                    "data": 220
+                },
+                {
+                    "data": 40
+                },
+                {
+                    "data": 3000
+                },
+                {
+                    "data": 8000
+                },
+                {
+                    "data": 800
+                },
+                {
+                    "data": -80
+                }
+            ],
+            // 縦軸ラベル
+            "row": [
+                {
+                    "label": "-5000"
+                },
+                {
+                    "label": "0"
+                },
+                {
+                    "label": "5000"
+                },
+                {
+                    "label": "10000"
+                },
+                {
+                    "label": "15000"
+                },
+                {
+                    "label": "20000"
+                }
+            ],
+            // Y軸の最大最小値（最小は目盛がないところまで設定）と現在値
+            "graph": [
+                {
+                    "min": -5000,
+                    "max": 20000
+                }
+            ]
         }
     ]
 }]
@@ -151,12 +277,12 @@ function createGraph(jsonData, target) {
 
         // ペンギンの位置指定
         const box = target.parentElement.getElementsByClassName('bh_box')[0];
-        if (jsonData.column[i].data >= 0) {
-            box.style.top = Ycoordinate * 0.56 + 39 + 'px';
-            box.style.left = XCoordinate[i] * 0.93 + 40 + 'px';
-        } else if (jsonData.column[i].data < 0) {
+        if (jsonData.column[9].data >= 0) {
+            box.style.top = Ycoordinate + 'px';
+            box.style.left = XCoordinate[9] * 0.93 + 40 + 'px';
+        } else if (jsonData.column[9].data < 0) {
             box.style.top = Ycoordinate + 28 - fluctuationArea / 24 + 'px';
-            box.style.left = XCoordinate[i] + 30 - fluctuationArea / 24 + 'px';
+            box.style.left = XCoordinate[9] + 30 - fluctuationArea / 24 + 'px';
         }
 
         // ペンギンの大きさ指定
@@ -318,16 +444,16 @@ const graph = document.getElementsByClassName('bh_graph');
 window.addEventListener('DOMContentLoaded', function () {
     // グラフ生成処理呼び出し
     for (let i = 0; i < graph.length; i++) {
-        createGraph_Element(fileData[0].graphData[0], graph[i]);
-        createGraph(fileData[0].graphData[0], graph[i]);
-        setYlabelHeight(fileData[0].graphData[0], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight, graph[i]);
+        createGraph_Element(fileData[0].graphData[i], graph[i]);
+        createGraph(fileData[0].graphData[i], graph[i]);
+        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight, graph[i]);
     }
 });
 // リサイズ時にイベント登録
 window.addEventListener('resize', function () {
     for (let i = 0; i < graph.length; i++) {
-        createGraph(fileData[0].graphData[0], graph[i]);
-        setYlabelHeight(fileData[0].graphData[0], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight, graph[i]);
+        createGraph(fileData[0].graphData[i], graph[i]);
+        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight, graph[i]);
     }
 });
 
@@ -708,3 +834,31 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
 })
+
+// グラフ非表示化
+window.addEventListener('DOMContentLoaded', function () {
+    graphArea = document.getElementsByClassName('bh_graphArea');
+    graphArea[1].classList.add('bh_display_none');
+    graphArea[2].classList.add('bh_display_none');
+})
+
+
+// プルダウン変更時
+function changePulldown() {
+    graphMenu = document.getElementsByClassName('bh_pullDown_graphSelector_select')[0];
+    graphArea = document.getElementsByClassName('bh_graphArea');
+
+    for (let i = 0; i < graphMenu.length; i++) {
+        graphArea[i].classList.remove('bh_display_none');
+    }
+    if (graphMenu.value == "trans") {
+        graphArea[1].classList.add('bh_display_none');
+        graphArea[2].classList.add('bh_display_none');
+    } else if (graphMenu.value == "day") {
+        graphArea[0].classList.add('bh_display_none');
+        graphArea[2].classList.add('bh_display_none');
+    } else {
+        graphArea[0].classList.add('bh_display_none');
+        graphArea[1].classList.add('bh_display_none');
+    }
+}
