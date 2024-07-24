@@ -7,11 +7,11 @@
     <meta http-equiv="Pragma" content="no-cache">
     <title>あそび大学こども銀行 | とりひきのりれき</title>
     <!-- 共通CSS -->
-    <link rel="stylesheet" href="../bunk_files/p_css/reset.css?20230822">
+    <link rel="stylesheet" href="../bunk_files/p_css/reset.css">
     <link rel="stylesheet" href="../bunk_files/p_css/components.css">
     <link rel="stylesheet" href="../bunk_files/p_css/common.css">
     <!-- 画面個別CSS -->
-    <link rel="stylesheet" href="../bunk_files/p_css/history.css?20230822">
+    <link rel="stylesheet" href="../bunk_files/p_css/history.css">
 </head>
 
 <body>
@@ -83,6 +83,56 @@
             <div class="bh_historyGraphArea">
                 <div class="bh_historyAreaTitle">
                     <p class="bh_typo_historyTitle">ざんだかのりれき</p>
+                    <div class="bh_pullDown_graphSelector"><select class="bh_pullDown_graphSelector_select">
+                            <option value="trans" selected="selected">とりひきごと</option>
+                            <option value="day">日ごと</option>
+                            <option value="month">月ごと</option>
+                        </select>
+                        <div tabindex="0" class="bh_pullDown_graphSelector_menu">
+                            <div class="bh_pullDown_graphSelector_menu_selected"></div>
+                            <div class="bh_pullDown_graphSelector_icon_triangle"><svg width="32" height="32" viewbox="0 0 32 32"
+                                    fill="none" class="bh_pullDown_graphSelector_icon_triangleDown">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M23.0697 13.87L16.8197 19.69C16.5997 19.89 16.2997 20.01 15.9897 20.01C15.6797 20.01 15.3797 19.9 15.1597 19.69L8.90972 13.87C8.74972 13.71 8.63972 13.52 8.59972 13.31C8.55972 13.1 8.57972 12.88 8.66972 12.68C8.75972 12.48 8.90972 12.31 9.09972 12.19C9.28972 12.07 9.51972 12 9.74972 12H22.2597C22.4897 12 22.7197 12.06 22.9197 12.18C23.1197 12.3 23.2697 12.47 23.3497 12.67C23.4397 12.87 23.4597 13.09 23.4097 13.31C23.3597 13.52 23.2497 13.72 23.0797 13.87H23.0697Z"
+                                        fill="#0F92C4"></path>
+                                </svg><svg width="32" height="32" viewbox="0 0 32 32" fill="none"
+                                    class="bh_pullDown_graphSelector_icon_triangleUp">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M8.92929 18.13L15.1793 12.31C15.3993 12.11 15.6993 11.99 16.0093 11.99C16.3193 11.99 16.6193 12.1 16.8393 12.31L23.0893 18.13C23.2493 18.29 23.3593 18.48 23.3993 18.69C23.4393 18.9 23.4193 19.12 23.3293 19.32C23.2393 19.52 23.0893 19.69 22.8993 19.81C22.7093 19.93 22.4793 20 22.2493 20H9.73929C9.50929 20 9.27929 19.94 9.07929 19.82C8.88929 19.7 8.72929 19.53 8.64929 19.33C8.55929 19.13 8.53929 18.91 8.58929 18.69C8.63929 18.48 8.74929 18.28 8.91929 18.13H8.92929Z"
+                                        fill="#0F92C4"></path>
+                                </svg></div>
+                        </div>
+                        <div class="bh_pullDown_graphSelector_listBox">
+                            <ul class="bh_pullDown_graphSelector_list"></ul>
+                        </div>
+                        <div class="bh_pullDown_graphSelector_outSideClose"></div>
+                    </div>
+                </div>
+                <div class="bh_graphArea">
+                    <div class="bh_box">
+                        <img src="../bunk_files/p_image/penguin.png" alt="penguin" width="100%">
+                    </div>
+                    <div class="bh_graph">
+                        <div class="bh_canvasArea">
+                            <canvas class="bh_canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="bh_image">
+                        <img src="../bunk_files/p_image/antarctic.svg" alt="antarctic">
+                    </div>
+                </div>
+                <div class="bh_graphArea">
+                    <div class="bh_box">
+                        <img src="../bunk_files/p_image/penguin.png" alt="penguin" width="100%">
+                    </div>
+                    <div class="bh_graph">
+                        <div class="bh_canvasArea">
+                            <canvas class="bh_canvas"></canvas>
+                        </div>
+                    </div>
+                    <div class="bh_image">
+                        <img src="../bunk_files/p_image/antarctic.svg" alt="antarctic">
+                    </div>
                 </div>
                 <div class="bh_graphArea">
                     <div class="bh_box">
@@ -176,9 +226,9 @@
 
 </body>
 
-<script src="../bunk_files/p_css/event.js?20230822"></script>
-<script src="../bunk_files/p_css/common.js?20230822"></script>
-<script src="../bunk_files/p_css/history.js?20230822"></script>
+<script src="../bunk_files/p_css/event.js"></script>
+<script src="../bunk_files/p_css/common.js"></script>
+<script src="../bunk_files/p_css/history.js"></script>
 </body>
 
 </html>

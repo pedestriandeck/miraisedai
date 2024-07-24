@@ -5,44 +5,34 @@ const fileData = [{
             // 横軸の色とデータ
             "column": [
                 {
-                    "data": -200,
-                    "color": "#5993EB"
+                    "data": -200
                 },
                 {
-                    "data": 0,
-                    "color": "#4DABEF"
+                    "data": 0
                 },
                 {
-                    "data": 9000,
-                    "color": "#5ECAEC"
+                    "data": 9000
                 },
                 {
-                    "data": 18000,
-                    "color": "#D8DB5F"
+                    "data": 18000
                 },
                 {
-                    "data": 22000,
-                    "color": "#F0D800"
+                    "data": 22000
                 },
                 {
-                    "data": 4000,
-                    "color": "#FABF00"
+                    "data": 4000
                 },
                 {
-                    "data": 300,
-                    "color": "#F69C00"
+                    "data": 300
                 },
                 {
-                    "data": 80,
-                    "color": "#F28300"
+                    "data": 80
                 },
                 {
-                    "data": -5800,
-                    "color": "#F15D78"
+                    "data": -5800
                 },
                 {
-                    "data": 8000,
-                    "color": "#E53935"
+                    "data": 8000
                 }
             ],
             // 縦軸ラベル
@@ -81,6 +71,7 @@ const fileData = [{
 // jsonData：JSONファイルデータ
 // target：対象グラフ
 // ==========================================================================
+
 function createGraph(jsonData, target) {
     // キャンバス設定
     const graph_canvas = target.getElementsByClassName('bh_canvas')[0];
@@ -89,7 +80,9 @@ function createGraph(jsonData, target) {
     graph_canvas.width = graph_canvas.offsetWidth;
     graph_canvas.height = graph_canvas.offsetHeight;
     const width = graph_canvas.offsetWidth;
+    console.log(width);
     const height = graph_canvas.offsetHeight;
+    console.log(height);
 
     // 縦軸の値1に対しての高さ
     const heightPerOne = height / (jsonData.graph[0].max - jsonData.graph[0].min);
@@ -157,13 +150,13 @@ function createGraph(jsonData, target) {
         }
 
         // ペンギンの位置指定
-        const box = document.getElementsByClassName('bh_box')[0];
+        const box = target.parentElement.getElementsByClassName('bh_box')[0];
         if (jsonData.column[i].data >= 0) {
             box.style.top = Ycoordinate * 0.56 + 39 + 'px';
             box.style.left = XCoordinate[i] * 0.93 + 40 + 'px';
         } else if (jsonData.column[i].data < 0) {
             box.style.top = Ycoordinate + 28 - fluctuationArea / 24 + 'px';
-            box.style.left = XCoordinate[i]  + 30 - fluctuationArea / 24 + 'px';
+            box.style.left = XCoordinate[i] + 30 - fluctuationArea / 24 + 'px';
         }
 
         // ペンギンの大きさ指定
@@ -172,7 +165,7 @@ function createGraph(jsonData, target) {
     }
 
     // 背景の幅指定
-    const backGroundImage = document.getElementsByClassName('bh_image')[0];
+    const backGroundImage = target.parentElement.getElementsByClassName('bh_image')[0];
     backGroundImage.firstElementChild.style.width = graph_canvas.width + 'px';
 }
 
@@ -314,9 +307,9 @@ function createGraph_Element(jsonData, target) {
 }
 
 // y軸ラベルの高さ調整
-function setYlabelHeight(jsondata, height) {
+function setYlabelHeight(jsondata, height, target) {
     for (let i = 0; i < jsondata.row.length; i++) {
-        document.getElementsByClassName('bh_graph_Ylabel')[i].style.height = height / (jsondata.row.length - 1) + 'px';
+        target.getElementsByClassName('bh_graph_Ylabel')[i].style.height = height / (jsondata.row.length - 1) + 'px';
     }
 }
 
@@ -325,18 +318,20 @@ const graph = document.getElementsByClassName('bh_graph');
 window.addEventListener('DOMContentLoaded', function () {
     // グラフ生成処理呼び出し
     for (let i = 0; i < graph.length; i++) {
-        createGraph_Element(fileData[0].graphData[i], graph[i]);
-        createGraph(fileData[0].graphData[i], graph[i]);
-        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight);
+        createGraph_Element(fileData[0].graphData[0], graph[i]);
+        createGraph(fileData[0].graphData[0], graph[i]);
+        setYlabelHeight(fileData[0].graphData[0], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight, graph[i]);
     }
 });
 // リサイズ時にイベント登録
 window.addEventListener('resize', function () {
     for (let i = 0; i < graph.length; i++) {
-        createGraph(fileData[0].graphData[i], graph[i]);
-        setYlabelHeight(fileData[0].graphData[i], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight);
+        createGraph(fileData[0].graphData[0], graph[i]);
+        setYlabelHeight(fileData[0].graphData[0], graph[i].getElementsByClassName('bh_canvas')[0].offsetHeight, graph[i]);
     }
 });
+
+
 
 /*** メニュー画面からidと残高を引継ぎなど***/
 function formatNumberWithCommas(number) {
@@ -353,6 +348,9 @@ function formatNumberWithCommas(number) {
 
     return formattedNumber;
 }
+
+
+
 
 /* DBから値を取得して表示 */
 window.addEventListener('DOMContentLoaded', function () {
@@ -402,3 +400,311 @@ window.addEventListener('pageshow', function (e) {
         hideLoader();
     }
 });
+
+
+
+// プルダウン
+// select要素からリスト生成
+function makePull() {
+    // selestタグ取得
+    const pull_select = document.getElementsByClassName('bh_pullDown_graphSelector_select');
+
+    // 既にUlに作成されているliを削除
+    const collectionListUl = document.getElementsByClassName('bh_pullDown_graphSelector_list');
+    for (let i = 0; i < pull_select.length; i++) {
+        if (collectionListUl[i].hasChildNodes()) {
+            collectionListUl[i].innerHTML = '';
+        }
+    }
+
+    //プルダウンメニューをすべてに対して処理
+    for (let i = 0; i < pull_select.length; i++) {
+
+        //プルダウンメニュー内のoptionタグからliタグを生成
+        for (let j = 0; j < pull_select[i].length; j++) {
+
+            // 作成するli
+            const newLi = document.createElement('li');
+            newLi.setAttribute('tabindex', '0');
+            // 各リストの下線用div
+            const listBorderDiv = document.createElement("div");
+            // liタグ内に追加するチェックアイコン用のdiv
+            const checkDiv = document.createElement("div");
+            // liタグ内に追加する選択項目テキスト用のp
+            const listP = document.createElement('p');
+            listP.className = 'bh_typo_bodyM bh_typo_BLK10 bh_typo_align_left';
+
+            // li
+            // 選択されているoptionの場合、選択されていることを明示するクラス名を追加
+            if (pull_select[i].options[j].value == pull_select[i].value) {
+                newLi.classList.add("bh_pullDown_graphSelector_selected");
+                listP.className = 'bh_typo_headerS bh_typo_BLK10 bh_typo_align_left';
+            }
+            newLi.dataset.value = pull_select[i].options[j].value;
+
+            // 下線用div
+            listBorderDiv.classList.add("bh_pullDown_graphSelector_listBorder");
+            // チェックアイコン用div
+            checkDiv.classList.add("bh_pullDown_graphSelector_icon_check");
+
+            // チェックアイコンsvg生成
+            const checkSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            checkSvg.setAttribute("width", "24");
+            checkSvg.setAttribute("height", "24");
+            checkSvg.setAttribute("viewbox", "0 0 24 24");
+            checkSvg.setAttribute("fill", "none");
+            const checkSvgPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            checkSvgPath.setAttribute('d', 'M7.80859 12.4721L10.1657 14.8572L16.1895 8.76196');
+            checkSvgPath.setAttribute('stroke', '#008673');
+            checkSvgPath.setAttribute('stroke-width', 2);
+            checkSvgPath.setAttribute('stroke-linecap', 'round');
+            checkSvgPath.setAttribute('stroke-linejoin', 'round');
+            checkSvg.appendChild(checkSvgPath);
+            // divにチェックアイコンsvg追加
+            checkDiv.appendChild(checkSvg);
+            // プルダウンメニューのoptionタグのテキストをliのpに反映
+            listP.innerHTML = pull_select[i].options[j].innerHTML;
+            // チェックアイコンsvgの親div追加
+            listBorderDiv.appendChild(checkDiv);
+            // P追加
+            listBorderDiv.appendChild(listP);
+
+            // プルダウンメニューのoptionに凡例フラグがある場合にliに凡例アイコン追加
+            if (pull_select[i].options[j].classList.contains('bh_pullDown_graphSelector_hanrei_icon')) {
+                // liに追加する凡例アイコン用のdiv
+                const hanreiDiv = document.createElement("div");
+                hanreiDiv.classList.add("bh_pullDown_graphSelector_icon_hanrei");
+                // liに追加する凡例アイコンsvg生成
+                const hanreiSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+                hanreiSvg.setAttribute("width", "24");
+                hanreiSvg.setAttribute("height", "24");
+                hanreiSvg.setAttribute("viewbox", "0 0 24 24");
+                hanreiSvg.setAttribute("fill", "none");
+                const hanreiSvgRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                hanreiSvgRect.setAttribute("x", "4");
+                hanreiSvgRect.setAttribute("y", "4");
+                hanreiSvgRect.setAttribute("width", "16");
+                hanreiSvgRect.setAttribute("height", "16");
+                hanreiSvgRect.setAttribute("rx", "8");
+                hanreiSvgRect.setAttribute("fill", "#E53935");
+                const hanreiSvgPath1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                hanreiSvgPath1.setAttribute("d", "M11.9945 17C12.5628 17 13 16.5625 13 16C13 15.4271 12.5628 15 11.9945 15C11.4262 15 11 15.4271 11 16C11 16.5625 11.4262 17 11.9945 17Z");
+                hanreiSvgPath1.setAttribute("fill", "white");
+                const hanreiSvgPath2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                hanreiSvgPath2.setAttribute("d", "M12.9324 8.91535L12.6848 13.3524C12.6645 13.7157 12.3639 14 12 14C11.6361 14 11.3355 13.7157 11.3152 13.3524L11.0676 8.91535L11.0353 7.99938C11.016 7.45323 11.4535 7 12 7C12.5465 7 12.984 7.45323 12.9647 7.99938L12.9324 8.91535Z");
+                hanreiSvgPath2.setAttribute("fill", "white");
+                hanreiSvg.appendChild(hanreiSvgRect);
+                hanreiSvg.appendChild(hanreiSvgPath1);
+                hanreiSvg.appendChild(hanreiSvgPath2);
+                // 凡例アイコンdivに凡例アイコンsvg追加
+                hanreiDiv.appendChild(hanreiSvg);
+                // liに凡例アイコンdivの追加
+                listBorderDiv.appendChild(hanreiDiv);
+            }
+            // 下線用div追加
+            newLi.appendChild(listBorderDiv);
+
+            // optionがhiddenならliを表示しない
+            // optionタグにhiddenが設定されているか判定
+            if (pull_select[i].options[j].hidden) {
+                newLi.style.display = "none";
+            }
+
+            // li追加
+            document.getElementsByClassName('bh_pullDown_graphSelector_list')[i].appendChild(newLi);
+
+            // menuの初期表示テキストとして選択されている項目のテキストを表示
+            if (newLi.classList.contains('bh_pullDown_graphSelector_selected')) {
+                document.getElementsByClassName('bh_pullDown_graphSelector_menu_selected')[i].innerHTML = listBorderDiv.innerHTML.replace('bh_typo_BLK10', 'bh_typo_BLUE').replace('bh_typo_align_left', 'bh_typo_align_left bh_typo_oneLine');
+            }
+
+            // リスト押下時にイベント登録
+            newLi.addEventListener('click', clickPullDownSelectList);
+
+            // キー操作が行われたら処理を実行
+            newLi.addEventListener('keydown', function (e) {
+                // クリックイベントの生成
+                if (c_isbrowserIE()) {
+                    clickEvent = document.createEvent('Event');
+                    clickEvent.initEvent('click', false, true);
+                } else {
+                    clickEvent = new Event('click');
+                }
+
+                // EnterキーもしくはSpace押下で該当項目を選択する
+                // keyCode : "13" （Enter）
+                if (e.keyCode == "13") {
+                    this.dispatchEvent(clickEvent);
+                }
+            });
+        }
+    }
+}
+
+/* プルダウンの開閉状態を設定 */
+function clickPullDown() {
+    // 対象のプルダウンを設定
+    const parentPullDown = this.parentElement;
+
+    // 押下したプルダウン以外はすべて閉じる
+    const pulldown = document.getElementsByClassName('bh_pullDown_graphSelector');
+    for (let i = 0; i < pulldown.length; i++) {
+        if ((pulldown[i] != parentPullDown) && (pulldown[i].classList.contains('bh_pullDown_graphSelector_isOpen'))) {
+            pulldown[i].classList.remove('bh_pullDown_graphSelector_isOpen');
+        }
+    }
+
+    // 開閉フラグの判定
+    if (parentPullDown.classList.contains('bh_pullDown_graphSelector_isOpen')) {
+        // 開いている状態なら閉じる
+        // openフラグの削除
+        parentPullDown.classList.remove('bh_pullDown_graphSelector_isOpen');
+    } else {
+        // 閉じている状態なら開く
+        // リストの表示位置・高さを指定する関数を呼び出す
+        setListBox(parentPullDown);
+        // openフラグの追加
+        parentPullDown.classList.add('bh_pullDown_graphSelector_isOpen');
+    }
+}
+
+/* リストボックスの高さを取得し表示位置を設定 */
+function setListBox(targetElement) {
+    // 各パーツを変数化
+    // 対象のプルダウンメニュー
+    const targetPullDownMenu = targetElement.getElementsByClassName('bh_pullDown_graphSelector_menu')[0];
+    // 対象のリストボックス
+    const listBox = targetElement.getElementsByClassName('bh_pullDown_graphSelector_listBox')[0];
+    // リストボックスに含まれる凡例行
+    const hanrei = listBox.getElementsByClassName('bh_pullDown_graphSelector_hanrei');
+
+    // 画面の高さ取得
+    const windowHeight = document.documentElement.clientHeight;
+    // プルダウンメニューの画面内のtop位置取得
+    const pullDownMenuTop = targetPullDownMenu.getBoundingClientRect().top;
+    // プルダウンメニューの画面内のbottom位置取得
+    const pullDownMenuBottom = targetPullDownMenu.getBoundingClientRect().bottom;
+    // プルダウンメニューの高さ
+    const pullDownMenuHeight = targetPullDownMenu.offsetHeight;
+    // リストボックスとプルダウンメニュー間の余白(8px)
+    const listMargin = 8;
+    // リストボックスの表示位置
+    const listBoxPosition = pullDownMenuHeight + listMargin;
+    // 上に伸びる際のリスト表示可能エリア
+    const listAreaUpper = pullDownMenuTop - (listMargin * 2);
+    // 下に伸びる際のリストの表示可能エリア
+    const listArea = windowHeight - (pullDownMenuBottom + (listMargin * 2));
+
+    // プルダウンの上下余白を比較
+    if (listAreaUpper > listArea) {
+        // プルダウンエリア最上部から余白8px上に表示
+        listBox.style.bottom = listBoxPosition + "px";
+        listBox.style.top = '';
+
+        // リストボックスの高さの最大値を設定
+        listBox.style.maxHeight = listAreaUpper + "px";
+    } else {
+        // 通常は下に伸びる
+        // プルダウンエリア最上部からメニューの高さ＋余白8px下に表示
+        listBox.style.top = listBoxPosition + "px";
+        listBox.style.bottom = null;
+
+        // リストボックスの高さの最大値を設定
+        listBox.style.maxHeight = listArea + "px";
+    }
+}
+
+/* リストの選択状態を設定 */
+function clickPullDownSelectList() {
+    // フラグの判定
+    if (!this.classList.contains('bh_pullDown_graphSelector_selected')) {
+        // 各パーツを変数化
+        // 全リスト
+        const list = this.parentElement.children;
+        // 対象プルダウン
+        const targetElement = this.parentElement.parentElement.parentElement;
+        // 対象プルダウンメニューのテキストエリア
+        const pullDownMenuText = targetElement.getElementsByClassName('bh_pullDown_graphSelector_menu_selected')[0];
+        // プルダウンメニュー
+        const thisSelect = targetElement.getElementsByClassName('bh_pullDown_graphSelector_select')[0];
+
+        // リスト選択有無フラグ設定削除
+        for (let i = 0; i < list.length; i++) {
+            list[i].classList.remove('bh_pullDown_graphSelector_selected');
+            list[i].innerHTML = list[i].innerHTML.replace('bh_typo_headerS', 'bh_typo_bodyM');
+        }
+        // 選択フラグの設定
+        this.classList.add('bh_pullDown_graphSelector_selected');
+        this.innerHTML = this.innerHTML.replace('bh_typo_bodyM', 'bh_typo_headerS');
+
+        // プルダウンメニューのテキスト設定
+        pullDownMenuText.innerHTML = this.getElementsByClassName('bh_pullDown_graphSelector_listBorder')[0].innerHTML.replace('bh_typo_BLK10', 'bh_typo_BLUE').replace('bh_typo_align_left', 'bh_typo_align_left bh_typo_oneLine');
+
+        // optionタグにselectedを設定
+        for (let i = 0; i < thisSelect.length; i++) {
+            if (thisSelect.options[i].value == this.dataset.value) {
+                thisSelect.options[i].selected = true;
+
+                // onchangeイベント発火
+                if (thisSelect.onchange) {
+                    thisSelect.onchange();
+                }
+            }
+        }
+
+        // 選択したらリストを非表示
+        // openフラグの削除
+        targetElement.classList.remove('bh_pullDown_graphSelector_isOpen');
+    }
+}
+
+// 画面読み込み時にプルダウンリスト生成
+window.addEventListener('DOMContentLoaded', makePull);
+
+// コレクションを取得
+const pullDownMenu = document.getElementsByClassName('bh_pullDown_graphSelector_menu');
+// プルダウンメニュー押下時にイベント登録
+for (let i = 0; i < pullDownMenu.length; i++) {
+    pullDownMenu[i].addEventListener('click', clickPullDown); // クリック時に見出し部分と内容部分の高さを設定、アイコン部分のクラスを入れ替え
+}
+
+// コレクションを取得
+const pullDownOutSideClose = document.getElementsByClassName('bh_pullDown_graphSelector_outSideClose');
+
+// エリア外押下にイベント登録
+for (let i = 0; i < pullDownOutSideClose.length; i++) {
+    pullDownOutSideClose[i].addEventListener('click', clickPullDown); // クリック時に見出し部分と内容部分の高さを設定、アイコン部分のクラスを入れ替え
+}
+
+// リサイズ
+window.addEventListener('resize', function () {
+    const openMenu = document.getElementsByClassName('bh_pullDown_graphSelector_isOpen');
+    for (let i = 0; i < openMenu.length; i++) {
+        setListBox(openMenu[i]);
+    }
+});
+
+window.addEventListener('DOMContentLoaded', function () {
+    const pullDownList = document.getElementsByClassName('bh_pullDown_graphSelector');
+
+    for (let i = 0; i < pullDownList.length; i++) {
+        let clickEvent;
+        // キー操作が行われたら処理を実行
+        pullDownList[i].children[1].addEventListener('keydown', function (e) {
+            // クリックイベントの生成
+            if (c_isbrowserIE()) {
+                clickEvent = document.createEvent('Event');
+                clickEvent.initEvent('click', false, true);
+            } else {
+                clickEvent = new Event('click');
+            }
+
+            // EnterキーもしくはSpace押下で該当項目を選択する
+            // keyCode : "13" （Enter）
+            if (e.keyCode == "13") {
+                this.dispatchEvent(clickEvent);
+            }
+        });
+    }
+
+})
