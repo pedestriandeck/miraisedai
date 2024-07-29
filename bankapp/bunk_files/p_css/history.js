@@ -193,6 +193,114 @@ const fileData = [{
     ]
 }]
 
+// 取引履歴のデータ
+const transData = [{
+    "transData": [
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "1",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "2",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "3",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "4",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "5",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "6",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "7",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "8",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "9",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "10",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "11",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "12",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "13",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "1",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "1",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "1",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "1",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "3",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "4",
+            "transAmount": "99999"
+        },
+        {
+            "transTime": "2024/08/20 00:00:00",
+            "menuId": "5",
+            "transAmount": "99999"
+        }
+    ]
+}]
+
+
+
 // =====グラフ生成処理========================================================
 // jsonData：JSONファイルデータ
 // target：対象グラフ
@@ -206,9 +314,7 @@ function createGraph(jsonData, target) {
     graph_canvas.width = graph_canvas.offsetWidth;
     graph_canvas.height = graph_canvas.offsetHeight;
     const width = graph_canvas.offsetWidth;
-    console.log(width);
     const height = graph_canvas.offsetHeight;
-    console.log(height);
 
     // 縦軸の値1に対しての高さ
     const heightPerOne = height / (jsonData.graph[0].max - jsonData.graph[0].min);
@@ -862,3 +968,147 @@ function changePulldown() {
         graphArea[1].classList.add('bh_display_none');
     }
 }
+
+
+// 取引履歴表示
+window.addEventListener('DOMContentLoaded', function () {
+    const historyArea = document.getElementsByClassName('bh_transHistoryArea')[0];
+    historyArea.appendChild(makeHistoryList(transData[0]));
+})
+
+// 履歴一覧を作成する関数
+function makeHistoryList(data) {
+    if (data.transData[0]) {
+        // リスト要素の作成
+        const historyList = document.createElement("ul");
+        historyList.classList.add('bh_historyList');
+
+        for (let i = 0; i < data.transData.length; i++) {
+            // 中身の作成
+            const historyUnit = document.createElement("li");
+            historyUnit.classList.add('bh_historyUnit');
+
+            // タイムスタンプエリア
+            const timestampArea = document.createElement("div");
+            timestampArea.classList.add('bh_history_timestampArea');
+            // 日付エリア
+            const dateArea = document.createElement("div");
+            dateArea.classList.add('bh_history_date');
+            const date = document.createElement("p");
+            date.classList.add('bh_typo_timestamp');
+            const monthValue = data.transData[i].transTime.substr(5, 2);
+            const dayValue = data.transData[i].transTime.substr(8, 2);
+            const dateValue = monthValue + "月" + dayValue + "日";
+            date.innerText = dateValue;
+            dateArea.appendChild(date);
+            // 時間エリア
+            const timeArea = document.createElement("div");
+            timeArea.classList.add('bh_history_time');
+            const time = document.createElement("p");
+            time.classList.add('bh_typo_timestamp');
+            const hourValue = data.transData[i].transTime.substr(11, 2);
+            const minuteValue = data.transData[i].transTime.substr(14, 2);
+            const timeValue = hourValue + "時" + minuteValue + "分";
+            time.innerText = timeValue;
+            timeArea.appendChild(time);
+            // 子要素の格納
+            timestampArea.appendChild(dateArea);
+            timestampArea.appendChild(timeArea);
+
+            // 明細エリア
+            const detailArea = document.createElement("div");
+            detailArea.classList.add('bh_history_detailArea');
+            // メニューエリア
+            const menuArea = document.createElement("div");
+            menuArea.classList.add('bh_history_menu');
+            const menu = document.createElement("p");
+            menu.classList.add('bh_typo_historyDetail');
+            switch (data.transData[i].menuId) {
+                case "1":
+                    menu.innerText = "おかねをあずける";
+                    break;
+                case "2":
+                    menu.innerText = "おかねをひきだす";
+                    break;
+                case "3":
+                case "4":
+                case "5":
+                    menu.innerText = "おきゅうりょうをはらう";
+                    break;
+                case "6":
+                case "7":
+                    menu.innerText = "ぜいきんをはらう";
+                    break;
+                case "8":
+                case "9":
+                    menu.innerText = "あそび大学にあげる";
+                    break;
+                case "10":
+                case "11":
+                    menu.innerText = "土地代をはらう";
+                    break;
+                default:
+                    menu.innerText = "読み込めません"
+            }
+            menuArea.appendChild(menu);
+            // 金額エリア
+            const valueArea = document.createElement("div");
+            valueArea.classList.add('bh_history_value');
+            const value = document.createElement("p");
+            value.classList.add('bh_typo_historyValue');
+            switch (data.transData[i].menuId) {
+                case "1":
+                    value.innerText = "+" + data.transData[i].transAmount;
+                    break;
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "10":
+                case "11":
+                    value.innerText = "-" + data.transData[i].transAmount;
+                    break;
+                default:
+                    value.innerText = data.transData[i].transAmount;
+            }
+            valueArea.appendChild(value);
+            const kids = document.createElement("p");
+            kids.classList.add('bh_typo_historyDetail');
+            kids.innerText = "キッズ";
+            valueArea.appendChild(kids);
+            // 子要素の格納
+            detailArea.appendChild(menuArea);
+            detailArea.appendChild(valueArea);
+
+            // 履歴要素完成
+            historyUnit.appendChild(timestampArea);
+            historyUnit.appendChild(detailArea);
+
+            // リストに格納
+            historyList.appendChild(historyUnit);
+
+            // 仕切り線
+            if (i < data.transData.length - 1) {
+                const borderArea = document.createElement('li');
+                borderArea.classList.add('bh_historyPartition');
+                const borderLine = document.createElement('hr');
+                borderLine.classList.add('bh_partition_dashed');
+                borderArea.appendChild(borderLine);
+                historyList.appendChild(borderArea);
+            }
+        }
+        return historyList;
+    }
+}
+
+// 履歴がある場合非表示メッセージを外す
+window.addEventListener('DOMContentLoaded', function () {
+    const historyArea = document.getElementsByClassName('bh_transHistoryArea')[0];
+    if (transData[0].transData[0]) {
+        historyArea.firstElementChild.classList.add('bh_display_none');
+    }
+})

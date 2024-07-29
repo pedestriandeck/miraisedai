@@ -1,3 +1,11 @@
+/* ヘッダー */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+
 /* メイン */
 /* 非表示クラス */
 .bh_display_none {
@@ -5,8 +13,16 @@
 }
 
 /* 残高表示エリア */
+.bh_userCardSec {
+    position: fixed;
+    top: 64px;
+    width: 100%;
+    z-index: 9;
+    background-color: #FFFFFF;
+}
+
 .bh_userCardArea {
-    padding: 32px 20px 0;
+    padding: 32px 20px 8px;
 }
 
 .bh_userCard {
@@ -53,6 +69,10 @@
 }
 
 /* グラフ表示エリア */
+.bh_historyGraphSec {
+    padding-top: 200px;
+}
+
 .bh_historyGraphArea {
     padding: 32px 20px 0;
 }
@@ -388,6 +408,17 @@
     padding: 16px 20px;
     background-color: #FEF2CC;
     box-shadow: 0px -4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.bh_historyIsNull {
+    padding: 16px 0;
+}
+
+.bh_nullTypo {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: center;
 }
 
 .bh_historyUnit {
