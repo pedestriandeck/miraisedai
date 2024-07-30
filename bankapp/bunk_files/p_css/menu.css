@@ -33,7 +33,7 @@ body {
 }
 
 .bm_userCardArea {
-    padding: 32px 36px 0;
+    padding: 28px 36px 0;
 }
 
 .bm_userCard {
@@ -64,9 +64,9 @@ body {
 }
 
 .bm_typo_amount {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 700;
-    line-height: 26px;
+    line-height: 32px;
     color: #2E2E2E;
 }
 
@@ -79,7 +79,7 @@ body {
 
 /* メニューエリア */
 .bm_menuArea {
-    padding: 32px 16px;
+    padding: 24px 16px 28px;
 }
 
 .bm_menuList {
