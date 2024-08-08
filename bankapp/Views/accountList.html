@@ -17,7 +17,7 @@
 <body>
     <!-- ヘッダー -->
     <header>
-        <div class="com_headerContent">
+        <div class="com_headerContent bal_headerContent">
             <p class="com_typo_header"><span class="c_typo_PNK01">あ</span><span class="c_typo_PPL01">そ</span><span
                     class="c_typo_BLU01">び</span><span class="c_typo_GRN01"><ruby>大<rt>だい</rt></ruby></span><span
                     class="c_typo_YEL01"><ruby>学<rt>がく</rt></ruby></span>　こども<ruby>銀行<rt>ぎんこう</rt></ruby></p>
@@ -30,10 +30,38 @@
     <!-- メイン -->
     <main>
         <!-- タイトルセクション -->
-        <section class="bac_ttlSec">
-            <h1 class="bacom_typo_ttl">アカウント<ruby>一覧<rt>いちらん</rt></ruby></h1>
-            <div class="bac_lead">
-                <p class="bacom_typo_lead"></p>
+        <section class="bal_ttlSec">
+            <div class="bal_ttl">
+                <h1 class="bal_typo_ttl">ユーザー<ruby>一覧<rt>いちらん</rt></ruby></h1>
+                <div class="bal_lead">
+                    <p class="bal_typo_lead"><ruby>登録<rt>とうろく</rt></ruby>されたユーザーを<ruby>検索<rt>けんさく</rt></ruby>できます。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 一覧セクション -->
+        <section class="bal_listSec">
+            <div class="bal_listArea">
+                <div class="bal_listTop">
+                    <!-- 検索欄 -->
+                    <div class="bal_searchInputWrapper">
+                        <input type="text" placeholder="ニックネーム" tabindex="0" class="bal_searchInput"
+                            id="bal_searchInput">
+                        <div class="bal_seachSujest bal_hideSeachSujest">
+                            <ul class="bal_seachSujestList" id="bal_seachSujestList"></ul>
+                        </div>
+                    </div>
+                    <!-- 検索ボタン -->
+                    <div class="bal_searchBtnWrapper">
+                        <button tabindex="0" class="bal_searchBtn" id="bal_searchBtn">
+                            <p>検索</p>
+                        </button>
+                    </div>
+                </div>
+                <!-- ユーザー一覧 -->
+                <div class="bal_listWrapper">
+                    <ul class="bal_userList" id="bal_userList"></ul>
+                </div>
             </div>
         </section>
     </main>
