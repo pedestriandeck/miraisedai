@@ -1350,3 +1350,13 @@ function penguinSwitch() {
     }
 
 }
+
+/* ログアウト */
+const logoutLink = document.getElementById('com_logoutLink');
+
+logoutLink.addEventListener('click', function () {
+    let result = window.confirm('ほんとうにログアウトしますか？\n※ログインがめんにもどります');
+    if (result) {
+        this.href = './login.html';
+    }
+});
