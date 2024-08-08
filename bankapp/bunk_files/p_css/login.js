@@ -119,7 +119,18 @@ window.addEventListener('DOMContentLoaded', function () {
             if (data.status !== undefined) {
                 // レスポンスが返ってきた場合
                 // URLにクエリパラメータを付与して遷移
-                location.href = setQueryParams('./menu.html', { id: userIdValue });
+                // location.href = setQueryParams('./menu.html', { id: userIdValue });
+
+                // ローカルストレージにuserIdとニックネームを保存
+                try {
+                    localStorage.setItem('userId',userIdValue);
+                    localStorage.setItem('userName',nickname.innerText);
+                } catch (error) {
+                    // エラー内容
+                    window.alert('')
+                }finally{
+                    location.href = './menu.html';
+                }
             }
         }).catch(function (error) {
             // レスポンスが返ってこなかった場合

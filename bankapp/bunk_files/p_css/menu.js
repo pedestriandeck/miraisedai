@@ -4,7 +4,7 @@ function formatNumberWithCommas(number) {
     const strNumber = number.toString();
     let formattedNumber = '';
 
-    for (let i = strNumber.length - 1, count = 0; i >= 0; i--, count++) {
+    for (let i = strNumber.length - 1, count = 1; i >= 0; i--, count++) {
         formattedNumber = strNumber[i] + formattedNumber;
         if (count !== 0 && count % 3 === 0 && i !== 0) {
             formattedNumber = ',' + formattedNumber; // 3桁ごとにカンマを追加
@@ -31,23 +31,57 @@ window.addEventListener('DOMContentLoaded', function () {
     createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
 
     // IDの認証
-    const userId = getQueryParams('id');
-    const nameDeployUrl = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
-    let queryParams = {
-        id: userId
-    };
+    // const userId = this.localStorage;
+    // const nameDeployUrl = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+    // let queryParams = {
+    //     id: userId
+    // };
 
-    const newNameUrl = setQueryParams(nameDeployUrl, queryParams);
-    fetch(newNameUrl).then(function (nameResponse) {
-        // レスポンスデータをJSON形式に変換
-        return nameResponse.json();
-    }).then(function (nameData) {
-        const name = nameData.content;
+    // const newNameUrl = setQueryParams(nameDeployUrl, queryParams);
+    // fetch(newNameUrl).then(function (nameResponse) {
+    //     // レスポンスデータをJSON形式に変換
+    //     return nameResponse.json();
+    // }).then(function (nameData) {
+    //     const name = nameData.content;
+    //     const nameElement = document.getElementById('bm_nameValue');
+    //     nameElement.innerText = name;
+    // }).then(function () {
+    // const amountDeployUrl = 'https://script.google.com/macros/s/AKfycbxWNd3mbrOy7feXkLnWgfrWvGrSXX9jC_yebsJ-0LfYnWeiQfl41s1Fz_0xTim8m3OhnA/exec';
+    // const newAmountUrl = setQueryParams(amountDeployUrl, queryParams);
+    // fetch(newAmountUrl).then(function (amountResponse) {
+    //     // レスポンスデータをJSON形式に変換
+    //     return amountResponse.json();
+    // }).then(function (amountData) {
+    //     const amount = Number(amountData.content);
+    //     const amoountElement = document.getElementById('bm_amountValue');
+    //     amoountElement.innerText = formatNumberWithCommas(amount);
+    //     changeFace(amount);
+    // }).then(function () {
+    //     // ローダーの非表示
+    //     hideLoader();
+    // }).catch(function (error) {
+    //     window.alert('ネットワークにせつぞくされているかかくにんしてください');
+    // });
+    // }).catch(function (error) {
+    //     // ローダーの非表示
+    //     hideLoader();
+    //     window.alert('ネットワークにせつぞくされているかかくにんしてください');
+    // });
+
+    // 名前の表示処理
+    let userName = '';
+    let userId = '';
+    try {
+        userName = localStorage.getItem('userName');
+        userId = localStorage.getItem('userId');
+    } catch (error) {
+        userName = '---';
+    } finally {
         const nameElement = document.getElementById('bm_nameValue');
-        nameElement.innerText = name;
-    }).then(function () {
+        nameElement.innerText = userName;
+        // 残高の表示処理
         const amountDeployUrl = 'https://script.google.com/macros/s/AKfycbxWNd3mbrOy7feXkLnWgfrWvGrSXX9jC_yebsJ-0LfYnWeiQfl41s1Fz_0xTim8m3OhnA/exec';
-        const newAmountUrl = setQueryParams(amountDeployUrl, queryParams);
+        const newAmountUrl = setQueryParams(amountDeployUrl, { id: userId });
         fetch(newAmountUrl).then(function (amountResponse) {
             // レスポンスデータをJSON形式に変換
             return amountResponse.json();
@@ -55,6 +89,8 @@ window.addEventListener('DOMContentLoaded', function () {
             const amount = Number(amountData.content);
             const amoountElement = document.getElementById('bm_amountValue');
             amoountElement.innerText = formatNumberWithCommas(amount);
+            console.log(formatNumberWithCommas(amount));
+            localStorage.setItem('amount', formatNumberWithCommas(amount));
             changeFace(amount);
         }).then(function () {
             // ローダーの非表示
@@ -62,11 +98,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }).catch(function (error) {
             window.alert('ネットワークにせつぞくされているかかくにんしてください');
         });
-    }).catch(function (error) {
-        // ローダーの非表示
-        hideLoader();
-        window.alert('ネットワークにせつぞくされているかかくにんしてください');
-    });
+    }
 });
 
 /* ログアウト */
