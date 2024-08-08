@@ -5,11 +5,6 @@ body {
 }
 
 /* 詳細エリア */
-.bm_detailArea {
-    padding: 16px 20px;
-    background-color: #FFFFFF;
-}
-
 .bm_nameArea {
     display: flex;
     align-items: flex-end;
@@ -37,6 +32,18 @@ body {
     padding-top: 8px;
 }
 
+.bm_userCardArea {
+    padding: 28px 36px 0;
+}
+
+.bm_userCard {
+    position: relative;
+    padding: 16px;
+    background: #FFFFFF;
+    border: 3px solid #D5D5D5;
+    border-radius: 16px;
+}
+
 .bm_goodFaceIcon,
 .bm_badFaceIcon {
     display: none;
@@ -57,9 +64,9 @@ body {
 }
 
 .bm_typo_amount {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 700;
-    line-height: 26px;
+    line-height: 32px;
     color: #2E2E2E;
 }
 
@@ -72,7 +79,7 @@ body {
 
 /* メニューエリア */
 .bm_menuArea {
-    padding: 32px 36px;
+    padding: 24px 16px 28px;
 }
 
 .bm_menuList {
@@ -87,14 +94,6 @@ body {
     width: 50%;
 }
 
-.bm_menuList>li:nth-child(odd) {
-    padding-right: 16px;
-}
-
-.bm_menuList>li:nth-child(even) {
-    padding-left: 16px;
-}
-
 .bm_menuList>li:nth-child(n+3) {
     padding-top: 24px;
 }
@@ -107,6 +106,10 @@ body {
     padding: 8px;
     background-color: #FFFFFF;
     box-shadow: 0 0 4px 4px rgb(46, 46, 46, 0.2);
+}
+
+li:nth-child(4)>.bm_menuBtn {
+    padding: 16px 8px;
 }
 
 .bm_depositBtn {
@@ -130,6 +133,7 @@ body {
 }
 
 .bm_helpBtn {
+    padding: 16px 8px;
     border: 2px solid #E84F4C;
 }
 
