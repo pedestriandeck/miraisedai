@@ -145,6 +145,10 @@ body {
     padding-top: 24px;
 }
 
+.bal_userListHidden {
+    display: none;
+}
+
 .bal_userList>li:not(:first-child) {
     padding-top: 16px;
 }
@@ -156,10 +160,6 @@ body {
     border-radius: 24px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-}
-
-.bal_hideUserCard {
-    display: none;
 }
 
 .bal_userCard>svg {

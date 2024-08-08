@@ -7,7 +7,6 @@ var userDataList = [];
 
 window.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('bal_searchInput');
-    const searchBtn = document.getElementById('bal_searchBtn');
 
     createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
     getAllUsers();
@@ -38,28 +37,9 @@ window.addEventListener('DOMContentLoaded', function () {
         function clickSujest() {
             const searchInput = document.getElementById('bal_searchInput');
             const sujestList = document.getElementById('bal_seachSujestList');
-            
+
             searchInput.value = this.firstElementChild.innerText;
             sujestList.parentElement.classList.add('bal_hideSeachSujest');
-        }
-    });
-
-    searchBtn.addEventListener('click', function () {
-        const searchInput = document.getElementById('bal_searchInput');
-
-        if (searchInput.value) {
-            showLoader();
-
-            const sujestList = document.getElementById('bal_seachSujestList');
-
-            for (let i = 0; i < sujestList.children.length; i++) {
-                if (!sujestList.children.item(i).firstElementChild.innerText.includes(searchInput.value)) {
-
-                    sujestList.children.item(i).classList.add('bal_hideUserCard');
-                }
-            }
-
-            hideLoader();
         }
     });
 });
@@ -153,6 +133,30 @@ function displayAllUsers(users) {
 
     userDataList.sort((a, b) => {
         return b.userId - a.userId;
+    });
+
+    const searchBtn = document.getElementById('bal_searchBtn');
+
+    searchBtn.addEventListener('click', function () {
+        const searchInput = document.getElementById('bal_searchInput');
+
+        if (!searchInput.value) {
+            return;
+        }
+
+        showLoader();
+
+        const userList = document.getElementById('bal_userList');
+        console.log('userList.className');
+        console.log(userList.className);
+        
+        for (let i = 0; i < userList.children.length; i++) {
+            if (!userList.children.items(i).getElementsByClassName('bal_typo_userCard')[0].innerText.incluedes(searchInput.value)) {
+                userList.children.items(i).classList.add('bal_userListHidden');
+            }
+        }
+
+        hideLoader();
     });
 }
 
