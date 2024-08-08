@@ -1352,7 +1352,7 @@ function penguinSwitch() {
 }
 
 /* ログアウト */
-const logoutLink = document.getElementById('com_logoutLink');
+const logoutLink = document.getElementById('c_logoutLink');
 
 logoutLink.addEventListener('click', function () {
     let result = window.confirm('ほんとうにログアウトしますか？\n※ログインがめんにもどります');
