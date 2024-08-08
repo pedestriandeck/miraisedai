@@ -89,7 +89,6 @@ window.addEventListener('DOMContentLoaded', function () {
             const amount = Number(amountData.content);
             const amoountElement = document.getElementById('bm_amountValue');
             amoountElement.innerText = formatNumberWithCommas(amount);
-            console.log(formatNumberWithCommas(amount));
             localStorage.setItem('amount', formatNumberWithCommas(amount));
             changeFace(amount);
         }).then(function () {
