@@ -144,6 +144,7 @@ async function getAllUsers() {
     } catch (e) {
         console.log('エラー発生');
         console.log(e);
+        window.alert('ネットワークにせつぞくされているかかくにんしてください');
     } finally {
         hideLoader();
     }
