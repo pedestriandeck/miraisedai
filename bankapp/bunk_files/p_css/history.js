@@ -1031,9 +1031,11 @@ function makeHistoryList(data) {
                     menu.innerText = "おかねをひきだす";
                     break;
                 case "3":
-                case "4":
                 case "5":
                     menu.innerText = "おきゅうりょうをはらう";
+                    break;
+                case "4":
+                    menu.innerText = "おきゅうりょうをもらう";
                     break;
                 case "6":
                 case "7":
@@ -1058,11 +1060,11 @@ function makeHistoryList(data) {
             value.classList.add('bh_typo_historyValue');
             switch (data.transData[i].menuId) {
                 case "1":
+                case "4":
                     value.innerText = "+" + data.transData[i].transAmount;
                     break;
                 case "2":
                 case "3":
-                case "4":
                 case "5":
                 case "6":
                 case "7":
