@@ -249,15 +249,11 @@ body {
     text-align: right;
 }
 
-.bal_listWrapper {
-    padding-top: 16px;
-}
-
 .bal_userListHidden {
     display: none;
 }
 
-li:not(.bal_userListHidden):not(:first-child) {
+li:not(.bal_userListHidden) {
     padding-top: 16px;
 }
 
