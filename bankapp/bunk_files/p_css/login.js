@@ -1,8 +1,8 @@
 /** ログイン画面 **/
 // ID一覧スプレッドシートのウェブアプリURLを定義
-const IDLISTURL = 'https://script.google.com/macros/s/AKfycbyZktHo5yEeM3MRwe8CQ_Ym4c8MNV1GIM1qF01ViLEgCFV4l2sSYiepJkVac2so4f4L/exec';
+var IDLIST_GAS_URL = 'https://script.google.com/macros/s/AKfycbyu4JVtJzrqj4oiwhWebuScxrZK8wnCaXJ3ufNQM0If9BWpX4Vj1BJhRUkNIGkC04k/exec';
 // ログイン情報スプレッドシートのウェブアプリURLを定義
-const LOGURL = 'https://script.google.com/macros/s/AKfycbyc2dGW3Rjf51nWKMqmo4cO1jX9HaspnWsZXfU8YVKJh5LsuLrxN_-uX7wKDsIAef9Hfg/exec';
+var LOG_GAS_URL = 'https://script.google.com/macros/s/AKfycbyc2dGW3Rjf51nWKMqmo4cO1jX9HaspnWsZXfU8YVKJh5LsuLrxN_-uX7wKDsIAef9Hfg/exec';
 
 window.addEventListener('DOMContentLoaded', function () {
     // 要素を取得
@@ -11,9 +11,6 @@ window.addEventListener('DOMContentLoaded', function () {
     const userId = document.getElementById('bl_userId'); // 「ID」テキストフィールド
     const loginErrorArea = document.getElementsByClassName('bl_loginErrorArea')[0]; // ノーティフィケーションエリア
     const errorMessage = loginErrorArea.getElementsByClassName('c_notification_text')[0].firstElementChild // エラーメッセージ
-    const nickname = document.getElementById('bl_nickname');
-    const inputArea = document.getElementById('bl_inputMode');
-    const confirmArea = document.getElementById('bl_confirmMode');
 
     // ローダーの生成
     createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
@@ -48,38 +45,7 @@ window.addEventListener('DOMContentLoaded', function () {
         const userIdValue = userId.value;
 
         if (userIdValue != '') {
-            // ローダーを表示
-            showLoader();
-
-            // クエリパラメータをURLに追加
-            const getNameUrl = setQueryParams(IDLISTURL, { id: userIdValue });
-
-            // GASへGET送信
-            fetch(getNameUrl).then(function (response) {
-                if (response.ok) {
-                    // レスポンスが返ってきた場合
-                    // レスポンスデータをJSON形式に変換
-                    return response.json();
-                }
-            }).then(function (data) {
-                if (data.content !== undefined) {
-                    // レスポンスが返ってきた場合
-                    // ニックネームを表示
-                    nickname.innerText = data.name;
-                    // 入力⇔確認画面表示切り替え
-                    inputArea.classList.add('bl_hidden');
-                    confirmArea.classList.remove('bl_hidden');
-                }
-            }).catch(function (error) {
-                // レスポンスが返ってこなかった場合
-                // ノーティフィケーションを表示
-                loginErrorArea.classList.add('bl_showLoginError');
-                // エラーメッセージの文言を入力
-                errorMessage.innerHTML = 'ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください<br>' + error;
-            }).then(function () {
-                // ローダーを非表示
-                hideLoader();
-            });
+            getUserName(userIdValue);
         } else {
             // ノーティフィケーションを表示
             loginErrorArea.classList.add('bl_showLoginError');
@@ -109,7 +75,7 @@ window.addEventListener('DOMContentLoaded', function () {
         };
 
         // GASのウェブアプリURLにPOSTリクエストを送信
-        fetch(LOGURL, postparam).then(function (response) {
+        fetch(LOG_GAS_URL, postparam).then(function (response) {
             if (response.ok) {
                 // レスポンスが返ってきた場合
                 // レスポンスデータをJSON形式に変換
@@ -118,17 +84,15 @@ window.addEventListener('DOMContentLoaded', function () {
         }).then(function (data) {
             if (data.status !== undefined) {
                 // レスポンスが返ってきた場合
-                // URLにクエリパラメータを付与して遷移
-                // location.href = setQueryParams('./menu.html', { id: userIdValue });
-
                 // ローカルストレージにuserIdとニックネームを保存
                 try {
-                    localStorage.setItem('userId',userIdValue);
-                    localStorage.setItem('userName',nickname.innerText);
+                    const nickname = document.getElementById('bl_nickname');
+                    localStorage.setItem('userId', userIdValue);
+                    localStorage.setItem('userName', nickname.innerText);
                 } catch (error) {
                     // エラー内容
                     window.alert('')
-                }finally{
+                } finally {
                     location.href = './menu.html';
                 }
             }
@@ -141,6 +105,45 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// ユーザー名を取得する関数
+async function getUserName(userId) {
+    showLoader();
+
+    const newUrl = setQueryParams(IDLIST_GAS_URL, { action: 'getUser', userId: userId });
+
+    try {
+        const response = await fetch(newUrl);
+        const result = await response.json();
+
+        if (result.message) {
+            console.log('サーバーエラー発生');
+            console.log(result.message);
+        } else {
+            displayUserName(result.result.userName);
+        }
+    } catch (e) {
+        console.log('エラー発生');
+        console.log(e);
+    } finally {
+        hideLoader();
+    }
+}
+
+// ユーザー名を表示する関数
+function displayUserName(userName) {
+    if (userName) {
+        const nickname = document.getElementById('bl_nickname');
+        const inputArea = document.getElementById('bl_inputMode');
+        const confirmArea = document.getElementById('bl_confirmMode');
+
+        // ニックネームを表示
+        nickname.innerText = userName;
+        // 入力⇔確認画面表示切り替え
+        inputArea.classList.add('bl_hidden');
+        confirmArea.classList.remove('bl_hidden');
+    }
+}
 
 // ブラウザバック時の処理
 window.addEventListener('pageshow', function (e) {
