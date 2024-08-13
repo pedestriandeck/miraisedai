@@ -112,7 +112,7 @@ logoutLink.addEventListener('click', function () {
 
 /* 残高画面・フォームへ遷移時にIDをクエリパラメータとして付与 */
 window.addEventListener('DOMContentLoaded', function () {
-    const userId = getQueryParams('id');
+    const userId = localStorage.getItem('userId');
     const historyLink = document.getElementById('bm_historyBtn');
     const formLink = document.getElementsByClassName('bm_menuBtn');
 

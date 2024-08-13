@@ -787,16 +787,18 @@ window.addEventListener('DOMContentLoaded', function () {
         id: userId
     }
     const idDeployUrl = setQueryParams(defaultDeployUrl, idParams);
-    // let amountParams = {
-    //     action: 'GetTotalAmount'
-    // }
-    // const amountDeployUrl = setQueryParams(idDeployUrl, amountParams);
-    // console.log(amountDeployUrl);
-    // fetch(amountDeployUrl).then(function (amountResponse) {
-    //     return amountResponse.json();
-    // }).then(function(amountData){
-    //     console.log(amountData);
-    // })
+
+    let amountParams = {
+        action: 'GetTotalAmount'
+    }
+    const amountDeployUrl = setQueryParams(idDeployUrl, amountParams);
+    console.log(amountDeployUrl);
+    fetch(amountDeployUrl).then(function (amountResponse) {
+        return amountResponse.json();
+    }).then(function(amountData){
+        console.log(amountData);
+    })
+
     let transactionParams = {
         action: 'GetTransaction'
     }
