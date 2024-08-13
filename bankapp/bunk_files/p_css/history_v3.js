@@ -782,7 +782,7 @@ window.addEventListener('DOMContentLoaded', function () {
         amoountElement.innerText = amount;
     }
 
-    const defaultDeployUrl = 'https://script.google.com/macros/s/AKfycbwqzOAoHm6KLzRBqamjDJtTKjhcy_Hslm_WUURW4FXkqUTimv-nNfTE8sAoB9t5wa3c/exec'
+    const defaultDeployUrl = 'https://script.google.com/macros/s/AKfycbwvYK-3TGOBwE-nbYpMHYi4F3g2kS_limhkXBSBkYoGqMijbFVSLxfS0SSHjgE3zKHL/exec'
     let idParams = {
         id: userId
     }

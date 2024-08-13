@@ -116,9 +116,9 @@ window.addEventListener('DOMContentLoaded', function () {
     const historyLink = document.getElementById('bm_historyBtn');
     const formLink = document.getElementsByClassName('bm_menuBtn');
 
-    historyLink.addEventListener('click', function () {
-        location.href = setQueryParams('./history.html', { id: userId });
-    });
+    // historyLink.addEventListener('click', function () {
+    //     location.href = setQueryParams('./history.html', { id: userId });
+    // });
 
     for (let i = 0; i < formLink.length; i++) {
         formLink[i].addEventListener('click', function () {
