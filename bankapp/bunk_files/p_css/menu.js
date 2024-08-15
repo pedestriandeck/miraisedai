@@ -80,9 +80,16 @@ window.addEventListener('DOMContentLoaded', function () {
         const nameElement = document.getElementById('bm_nameValue');
         nameElement.innerText = userName;
         // 残高の表示処理
-        const amountDeployUrl = 'https://script.google.com/macros/s/AKfycbxWNd3mbrOy7feXkLnWgfrWvGrSXX9jC_yebsJ-0LfYnWeiQfl41s1Fz_0xTim8m3OhnA/exec';
-        const newAmountUrl = setQueryParams(amountDeployUrl, { id: userId });
-        fetch(newAmountUrl).then(function (amountResponse) {
+        // テスト環境
+        // const defaultDeployUrl = 'https://script.google.com/macros/s/AKfycbyeFYeMYV_CEyQ75PT1cLDtFlK_MBhxScO6X8GrChy7P1YopkEVv1H2kr5Dhxzg1YK_/exec';
+        // 本番環境
+        const defaultDeployUrl = 'https://script.google.com/macros/s/AKfycbxO78cBBcTQkZ2Nrrf-naPtk7tY-UVTiODeg8bsWOgG7zfDse6NPgwl5KoOxhGS4Zc5IQ/exec';
+        const idDeployUrl = setQueryParams(defaultDeployUrl, { id: userId });
+        let amountParams = {
+            action: 'GetTotalAmount'
+        }
+        const amountDeployUrl = setQueryParams(idDeployUrl, amountParams);
+        fetch(amountDeployUrl).then(function (amountResponse) {
             // レスポンスデータをJSON形式に変換
             return amountResponse.json();
         }).then(function (amountData) {

@@ -782,7 +782,10 @@ window.addEventListener('DOMContentLoaded', function () {
         amoountElement.innerText = amount;
     }
 
-    const defaultDeployUrl = 'https://script.google.com/macros/s/AKfycbwvYK-3TGOBwE-nbYpMHYi4F3g2kS_limhkXBSBkYoGqMijbFVSLxfS0SSHjgE3zKHL/exec'
+    // テスト環境
+    // const defaultDeployUrl = 'https://script.google.com/macros/s/AKfycbyeFYeMYV_CEyQ75PT1cLDtFlK_MBhxScO6X8GrChy7P1YopkEVv1H2kr5Dhxzg1YK_/exec';
+    // 本番環境
+    const defaultDeployUrl = 'https://script.google.com/macros/s/AKfycbxO78cBBcTQkZ2Nrrf-naPtk7tY-UVTiODeg8bsWOgG7zfDse6NPgwl5KoOxhGS4Zc5IQ/exec';
     let idParams = {
         id: userId
     }
@@ -1336,20 +1339,32 @@ function penguinSwitch() {
     penguinImage = document.getElementsByClassName('bh_imageArea');
 
     if (graphMenu.value == "day") {
-        if (fileData[0].graphData[0].column[9].data >= 0) {
+        if (fileData[0].graphData[0].column[9].data >= 20000) {
             penguinImage[0].firstElementChild.classList.remove('bh_display_none');
             penguinImage[1].firstElementChild.classList.add('bh_display_none');
-        } else {
+            penguinImage[2].firstElementChild.classList.add('bh_display_none');
+        } else if (fileData[0].graphData[0].column[9].data < 20000 && fileData[0].graphData[0].column[9].data >= 0) {
             penguinImage[0].firstElementChild.classList.add('bh_display_none');
             penguinImage[1].firstElementChild.classList.remove('bh_display_none');
+            penguinImage[2].firstElementChild.classList.add('bh_display_none');
+        } else {
+            penguinImage[0].firstElementChild.classList.add('bh_display_none');
+            penguinImage[1].firstElementChild.classList.add('bh_display_none');
+            penguinImage[2].firstElementChild.classList.remove('bh_display_none');
         }
     } else {
-        if (fileData[0].graphData[1].column[9].data >= 0) {
+        if (fileData[0].graphData[1].column[9].data >= 20000) {
             penguinImage[0].firstElementChild.classList.remove('bh_display_none');
             penguinImage[1].firstElementChild.classList.add('bh_display_none');
-        } else {
+            penguinImage[2].firstElementChild.classList.add('bh_display_none');
+        } else if (fileData[0].graphData[1].column[9].data < 20000 && fileData[0].graphData[1].column[9].data >= 0) {
             penguinImage[0].firstElementChild.classList.add('bh_display_none');
             penguinImage[1].firstElementChild.classList.remove('bh_display_none');
+            penguinImage[2].firstElementChild.classList.add('bh_display_none');
+        } else {
+            penguinImage[0].firstElementChild.classList.add('bh_display_none');
+            penguinImage[1].firstElementChild.classList.add('bh_display_none');
+            penguinImage[2].firstElementChild.classList.remove('bh_display_none');
         }
     }
 
