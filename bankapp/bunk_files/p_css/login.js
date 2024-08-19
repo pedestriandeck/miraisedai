@@ -44,13 +44,16 @@ window.addEventListener('DOMContentLoaded', function () {
         // 「ID」テキストフィールドの入力値を取得
         const userIdValue = userId.value;
 
-        if (userIdValue != '') {
+        if (userIdValue.length == 5) {
             getUserName(userIdValue);
         } else {
-            // ノーティフィケーションを表示
-            loginErrorArea.classList.add('bl_showLoginError');
-            // エラーメッセージの文言を入力
-            errorMessage.innerText = 'IDをにゅうりょくしてください';
+            if (userIdValue.length == 0) {
+                // エラーメッセージの文言を入力
+                showError('IDをにゅうりょくしてください');
+            } else {
+                // エラーメッセージの文言を入力
+                showError('IDは5桁です');
+            }
         }
     });
 
