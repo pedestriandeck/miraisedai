@@ -1,16 +1,16 @@
 /** ログイン画面 **/
+/* ID一覧スプレッドシート：https://docs.google.com/spreadsheets/d/17_Nby4CksFtpc-d_4MTuZrHrBsBp_JqBKpbJwZvNynI/edit?gid=0#gid=0 */
 // ID一覧スプレッドシートのウェブアプリURLを定義
-var IDLIST_GAS_URL = 'https://script.google.com/macros/s/AKfycbyu4JVtJzrqj4oiwhWebuScxrZK8wnCaXJ3ufNQM0If9BWpX4Vj1BJhRUkNIGkC04k/exec';
-// ログイン情報スプレッドシートのウェブアプリURLを定義
-var LOG_GAS_URL = 'https://script.google.com/macros/s/AKfycbyc2dGW3Rjf51nWKMqmo4cO1jX9HaspnWsZXfU8YVKJh5LsuLrxN_-uX7wKDsIAef9Hfg/exec';
+var IDLIST_GAS_URL = 'https://script.google.com/macros/s/AKfycbxuO97YNrFuWkkHWLWsZU4XMC2XDkwTbC3WTmqwoP4z6lnm4jIBJOxi4A5YeZWhjqvi/exec';
+/* ログイン履歴スプレッドシート：https://docs.google.com/spreadsheets/d/1sS71EywHbFpgPH9Ky2nf_05fFP9rchPHO55q4XL90P4/edit?gid=0#gid=0 */
+// ログイン履歴スプレッドシートのウェブアプリURLを定義
+var LOG_GAS_URL = 'https://script.google.com/macros/s/AKfycbzN7j5vPU1XWfXaA8Pnzc2XgLCHbDc0ygPcawb7Fs4fMoKVe4424Drn8n2B-spir4jLFQ/exec';
 
 window.addEventListener('DOMContentLoaded', function () {
     // 要素を取得
     const loginBtn = document.getElementById('bl_loginBtn'); // 「ログイン」ボタン
     const agreeBtn = document.getElementById('bl_agreeBtn'); // 「はい」ボタン
     const userId = document.getElementById('bl_userId'); // 「ID」テキストフィールド
-    const loginErrorArea = document.getElementsByClassName('bl_loginErrorArea')[0]; // ノーティフィケーションエリア
-    const errorMessage = loginErrorArea.getElementsByClassName('c_notification_text')[0].firstElementChild // エラーメッセージ
 
     // ローダーの生成
     createLoader('よみこみ<ruby>中<rt>ちゅう</rt></ruby>');
@@ -44,65 +44,25 @@ window.addEventListener('DOMContentLoaded', function () {
         // 「ID」テキストフィールドの入力値を取得
         const userIdValue = userId.value;
 
-        if (userIdValue != '') {
+        if (userIdValue.length == 5) {
             getUserName(userIdValue);
         } else {
-            // ノーティフィケーションを表示
-            loginErrorArea.classList.add('bl_showLoginError');
-            // エラーメッセージの文言を入力
-            errorMessage.innerText = 'IDをにゅうりょくしてください';
+            if (userIdValue.length == 0) {
+                // エラーメッセージの文言を入力
+                showError('IDをにゅうりょくしてください');
+            } else {
+                // エラーメッセージの文言を入力
+                showError('IDは5桁です');
+            }
         }
     });
 
     // 「はい」ボタン押下時の処理
     agreeBtn.addEventListener('click', function () {
-        // ローダーを表示
-        showLoader();
-
         // テキストフィールドの値（入力されたID）を取得
         const userIdValue = userId.value;
-
-        // 送信データを定義
-        let sendData = {
-            "userId": userIdValue
-        };
-
-        // 送信パラメータを定義
-        const postparam = {
-            "method": "POST",
-            "Content-Type": "application/json",
-            "body": JSON.stringify(sendData)
-        };
-
-        // GASのウェブアプリURLにPOSTリクエストを送信
-        fetch(LOG_GAS_URL, postparam).then(function (response) {
-            if (response.ok) {
-                // レスポンスが返ってきた場合
-                // レスポンスデータをJSON形式に変換
-                return response.json();
-            }
-        }).then(function (data) {
-            if (data.status !== undefined) {
-                // レスポンスが返ってきた場合
-                // ローカルストレージにuserIdとニックネームを保存
-                try {
-                    const nickname = document.getElementById('bl_nickname');
-                    localStorage.setItem('userId', userIdValue);
-                    localStorage.setItem('userName', nickname.innerText);
-                } catch (error) {
-                    // エラー内容
-                    window.alert('')
-                } finally {
-                    location.href = './menu.html';
-                }
-            }
-        }).catch(function (error) {
-            // レスポンスが返ってこなかった場合
-            // ノーティフィケーションを表示
-            loginErrorArea.classList.add('bl_showLoginError');
-            // エラーメッセージの文言を入力
-            errorMessage.innerHTML = 'ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください<br>' + error;
-        });
+        // ログイン履歴スプレッドシートにログを出力
+        postLog(userIdValue);
     });
 });
 
@@ -117,14 +77,14 @@ async function getUserName(userId) {
         const result = await response.json();
 
         if (result.message) {
-            console.log('サーバーエラー発生');
-            console.log(result.message);
+            // サーバーエラー発生時
+            showError(result.message);
         } else {
             displayUserName(result.result.userName);
         }
     } catch (e) {
-        console.log('エラー発生');
-        console.log(e);
+        // エラー発生時
+        showError('ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください<br>' + e);
     } finally {
         hideLoader();
     }
@@ -152,3 +112,48 @@ window.addEventListener('pageshow', function (e) {
         hideLoader();
     }
 });
+
+// ログイン履歴スプレッドシートにログを出力する関数
+async function postLog(userId) {
+    // ローダーを表示
+    showLoader();
+
+    // 送信パラメータを定義
+    const postparam = {
+        "method": "POST",
+        "Content-Type": "application/json",
+        "body": JSON.stringify({
+            "userId": userId
+        })
+    };
+
+    try {
+        const response = await fetch(LOG_GAS_URL, postparam);
+        const result = await response.json();
+
+        if (result.status == 'sucsess') {
+            const nickname = document.getElementById('bl_nickname');
+            localStorage.setItem('userId', userId);
+            localStorage.setItem('userName', nickname.innerText);
+            location.href = './menu.html';
+        } else {
+            showError(result.message);
+        }
+    } catch (e) {
+        // エラー発生時
+        showError('ネットワークに<ruby>接続<rt>せつぞく</rt></ruby>されているか<ruby>確認<rt>かくにん</rt></ruby>してください<br>' + e);
+    } finally {
+        hideLoader();
+    }
+}
+
+// エラーを表示する関数
+function showError(errMsg) {
+    const loginErrorArea = document.getElementsByClassName('bl_loginErrorArea')[0]; // ノーティフィケーションエリア
+    const errorMessage = loginErrorArea.getElementsByClassName('c_notification_text')[0].firstElementChild // エラーメッセージ
+
+    // ノーティフィケーションを表示
+    loginErrorArea.classList.add('bl_showLoginError');
+    // エラーメッセージの文言を入力
+    errorMessage.innerHTML = errMsg;
+}
