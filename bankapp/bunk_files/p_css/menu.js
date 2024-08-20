@@ -1,13 +1,27 @@
 /** メニュー選択画面 **/
 function formatNumberWithCommas(number) {
     // 数値を文字列に変換し、逆順にして桁区切りを追加する
-    const strNumber = number.toString();
-    let formattedNumber = '';
+    if (number < 0) {
+        strNumber = strNumber * -1;
+        const strNumber = number.toString();
+        let formattedNumber = '';
 
-    for (let i = strNumber.length - 1, count = 1; i >= 0; i--, count++) {
-        formattedNumber = strNumber[i] + formattedNumber;
-        if (count !== 0 && count % 3 === 0 && i !== 0) {
-            formattedNumber = ',' + formattedNumber; // 3桁ごとにカンマを追加
+        for (let i = strNumber.length - 1, count = 1; i >= 0; i--, count++) {
+            formattedNumber = strNumber[i] + formattedNumber;
+            if (count !== 0 && count % 3 === 0 && i !== 0) {
+                formattedNumber = ',' + formattedNumber; // 3桁ごとにカンマを追加
+            }
+        }
+        formattedNumber = '-' + formattedNumber;
+    } else {
+        const strNumber = number.toString();
+        let formattedNumber = '';
+
+        for (let i = strNumber.length - 1, count = 1; i >= 0; i--, count++) {
+            formattedNumber = strNumber[i] + formattedNumber;
+            if (count !== 0 && count % 3 === 0 && i !== 0) {
+                formattedNumber = ',' + formattedNumber; // 3桁ごとにカンマを追加
+            }
         }
     }
 

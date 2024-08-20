@@ -1238,23 +1238,31 @@ function makeHistoryList(data) {
                     menu.innerText = "おかねをひきだす";
                     break;
                 case 3:
-                case 5:
                     menu.innerText = "おきゅうりょうをはらう";
                     break;
                 case 4:
                     menu.innerText = "おきゅうりょうをもらう";
                     break;
+                case 5:
+                    menu.innerText = "おきゅうりょうのぜいきん";
+                    break;
                 case 6:
-                case 7:
                     menu.innerText = "ぜいきんをはらう";
                     break;
+                case 7:
+                    menu.innerText = "ぜいきんをうけとる";
+                    break;
                 case 8:
-                case 9:
                     menu.innerText = "あそび大学にあげる";
                     break;
+                case 9:
+                    menu.innerText = "あそび大学がもらう";
+                    break;
                 case 10:
-                case 11:
                     menu.innerText = "土地代をはらう";
+                    break;
+                case 11:
+                    menu.innerText = "土地代をもらう";
                     break;
                 default:
                     menu.innerText = "よみこめません"
@@ -1268,6 +1276,10 @@ function makeHistoryList(data) {
             switch (data[i].menuID) {
                 case 1:
                 case 4:
+                case 5:
+                case 7:
+                case 9:
+                case 11:
                     if (Math.abs(data[i].Amount) != 0) {
                         value.innerText = "+" + Math.abs(data[i].Amount);
                     } else {
@@ -1276,13 +1288,9 @@ function makeHistoryList(data) {
                     break;
                 case 2:
                 case 3:
-                case 5:
                 case 6:
-                case 7:
                 case 8:
-                case 9:
                 case 10:
-                case 11:
                     if (Math.abs(data[i].Amount) != 0) {
                         value.innerText = "-" + Math.abs(data[i].Amount);
                     } else {
