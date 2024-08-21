@@ -1,3 +1,20 @@
+/* バージョン管理 */
+/* アップデートを行った場合、versionの数値を増加してください */
+function setVersion() {
+    const version = "ver 2.01";
+    const versionArea = document.createElement('div');
+    versionArea.classList.add('com_versionArea');
+    const versionNum = document.createElement('p');
+    versionNum.classList.add('com_versionNum');
+    versionNum.innerText = version;
+    versionArea.appendChild(versionNum);
+    document.getElementsByClassName('bl_loginFormArea')[0].appendChild(versionArea);
+}
+
+if (document.getElementsByClassName('bl_loginFormArea')) {
+    window.addEventListener('DOMContentLoaded', setVersion);
+}
+
 /* 共通 */
 /* クエリストリング */
 // クエリストリングから指定したkey項目の値を取得
