@@ -1,19 +1,40 @@
 /* バージョン管理 */
-/* アップデートを行った場合、versionの数値を増加してください */
+// URLからファイル名を取得する関数
+function getFileName() {
+    // 現在表示されているページのURLを取得
+    const currentUrl = new URL(window.location.href);
+    // URLのパス部分を取得
+    const pathname = currentUrl.pathname;
+    // パス名からファイル名を取得
+    const filename = pathname.substring(pathname.lastIndexOf('/') + 1);
+
+    return filename;
+}
+
+// バージョン情報を表示する関数
 function setVersion() {
-    const version = "ver 2.01";
+    /* アップデートを行った場合、VERSIONの数値を増加してください */
+    const VERSION = '2.01';
+    const body = document.body;
+
     const versionArea = document.createElement('div');
     versionArea.classList.add('com_versionArea');
     const versionNum = document.createElement('p');
     versionNum.classList.add('com_versionNum');
-    versionNum.innerText = version;
+    versionNum.innerText = 'ver ' + VERSION;
     versionArea.appendChild(versionNum);
-    document.getElementsByClassName('bl_loginFormArea')[0].appendChild(versionArea);
+    body.appendChild(versionArea);
 }
 
-if (document.getElementsByClassName('bl_loginFormArea')) {
-    window.addEventListener('DOMContentLoaded', setVersion);
-}
+window.addEventListener('DOMContentLoaded', function () {
+    // URLからファイル名を取得
+    const filename = getFileName();
+
+    // ファイル名が "login.html" の場合、バージョン情報を表示
+    if (filename == 'login.html') {
+        setVersion();
+    }
+});
 
 /* 共通 */
 /* クエリストリング */
