@@ -8,41 +8,43 @@ function setVersion() {
     versionNum.classList.add('com_versionNum');
     versionNum.innerText = version;
     versionArea.appendChild(versionNum);
-    document.getElementsByClassName('bl_loginFormArea')[0].appendChild(versionArea);
+    document.body.appendChild(versionArea);
 }
 
-if (document.getElementsByClassName('bl_loginFormArea')) {
-    window.addEventListener('DOMContentLoaded', setVersion);
-}
+window.addEventListener('DOMContentLoaded', function () {
+    if (document.getElementsByClassName('bl_loginFormArea').length) {
+        setVersion();
+    }
+})
 
 /* 共通 */
 /* クエリストリング */
 // クエリストリングから指定したkey項目の値を取得
 function getQueryParams(key) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(key);
-}
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(key);
+    }
 
 // URLにクエリストリングを追加して返却
 function setQueryParams(url, queryParams) {
-    // URLオブジェクトを作成する
-    const urlObj = new URL(url, window.location.href);
+        // URLオブジェクトを作成する
+        const urlObj = new URL(url, window.location.href);
 
-    // URLSearchParamsオブジェクトを取得する
-    const urlSearchParams = urlObj.searchParams;
+        // URLSearchParamsオブジェクトを取得する
+        const urlSearchParams = urlObj.searchParams;
 
-    // クエリストリングのオブジェクトをループで処理する
-    for (const [key, value] of Object.entries(queryParams)) {
-        // クエリストリングのキーと値をURLSearchParamsオブジェクトに追加または更新する
-        urlSearchParams.set(key, value);
+        // クエリストリングのオブジェクトをループで処理する
+        for (const [key, value] of Object.entries(queryParams)) {
+            // クエリストリングのキーと値をURLSearchParamsオブジェクトに追加または更新する
+            urlSearchParams.set(key, value);
+        }
+
+        // URLオブジェクトのsearchプロパティを更新する
+        urlObj.search = urlSearchParams.toString();
+
+        // 新しいURLを文字列として返す
+        return urlObj.toString();
     }
-
-    // URLオブジェクトのsearchプロパティを更新する
-    urlObj.search = urlSearchParams.toString();
-
-    // 新しいURLを文字列として返す
-    return urlObj.toString();
-}
 
 /* アイコン移動 */
 if (document.getElementsByClassName('com_moveIcon')) {

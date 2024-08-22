@@ -65,7 +65,7 @@ footer {
 
 /* バージョン */
 .com_versionArea {
-    position: absolute;
+    position: fixed;
     bottom: 4px;
     right: 8px;
 }
